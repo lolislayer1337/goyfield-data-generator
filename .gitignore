@@ -1,0 +1,6 @@
+__pycache__/
+alldata/
+data/*
+locale/
+out/
+todo.txt
