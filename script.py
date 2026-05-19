@@ -1,77 +1,28 @@
+from pathlib import Path
+
+import paths
 from utils import get_json, save_json
 
 
-DATA_FOLDER_PATH = "./data/"
-OUT_FOLDER_PATH = "./out/"
+craft_table = get_json(paths.FACTORY_MACHINE_CRAFT_TABLE_PATH)
+craft_group_table = get_json(paths.FACTORY_MACHINE_CRAFT_GROUP_TABLE_PATH)
+crafters_table = get_json(paths.FACTORY_MACHINE_CRAFTER_TABLE_PATH)
+fuel_item_table = get_json(paths.FACTORY_FUEL_ITEM_TABLE_PATH)
+power_station_table = get_json(paths.FACTORY_POWER_STATION_TABLE_PATH)
+miner_table = get_json(paths.FACTORY_MINER_TABLE_PATH)
+building_item_reverse_table = get_json(paths.FACTORY_BUILDING_ITEM_REVERSE_TABLE_PATH)
+fluid_pump_in_table = get_json(paths.FACTORY_FLUID_PUMP_IN_TABLE_PATH)
+full_bottle_table = get_json(paths.FULL_BOTTLE_TABLE_PATH)
+manual_craft_table = get_json(paths.FACTORY_MANUAL_CRAFT_TABLE_PATH)
+hub_craft_table = get_json(paths.FACTORY_HUB_CRAFT_TABLE_PATH)
+item_table = get_json(paths.ITEM_TABLE_PATH)
+item_type_table = get_json(paths.ITEM_TYPE_TABLE_PATH)
+wiki_group_table = get_json(paths.WIKI_GROUP_TABLE_PATH)
+wiki_entry_data_table = get_json(paths.WIKI_ENTRY_DATA_TABLE_PATH)
+building_table = get_json(paths.FACTORY_BUILDING_TABLE_PATH)
 
-# input locales
-BR_PATH = DATA_FOLDER_PATH + "I18nTextTable_BR.json"
-CN_PATH = DATA_FOLDER_PATH + "I18nTextTable_CN.json"
-DE_PATH = DATA_FOLDER_PATH + "I18nTextTable_DE.json"
-EN_PATH = DATA_FOLDER_PATH + "I18nTextTable_EN.json"
-FR_PATH = DATA_FOLDER_PATH + "I18nTextTable_FR.json"
-ID_PATH = DATA_FOLDER_PATH + "I18nTextTable_ID.json"
-IT_PATH = DATA_FOLDER_PATH + "I18nTextTable_IT.json"
-JP_PATH = DATA_FOLDER_PATH + "I18nTextTable_JP.json"
-KR_PATH = DATA_FOLDER_PATH + "I18nTextTable_KR.json"
-MX_PATH = DATA_FOLDER_PATH + "I18nTextTable_MX.json"
-RU_PATH = DATA_FOLDER_PATH + "I18nTextTable_RU.json"
-TC_PATH = DATA_FOLDER_PATH + "I18nTextTable_TC.json"
-TH_PATH = DATA_FOLDER_PATH + "I18nTextTable_TH.json"
-VN_PATH = DATA_FOLDER_PATH + "I18nTextTable_VN.json"
-
-#output locales
-
-# input files
-ITEM_TABLE_PATH =                          DATA_FOLDER_PATH + "ItemTable.json"
-FULL_BOTTLE_TABLE_PATH =                   DATA_FOLDER_PATH + "FullBottleTable.json"
-FACTORY_MACHINE_CRAFT_TABLE_PATH =         DATA_FOLDER_PATH + "FactoryMachineCraftTable.json"
-FACTORY_MACHINE_CRAFT_GROUP_TABLE_PATH =   DATA_FOLDER_PATH + "FactoryMachineCraftGroupTable.json"
-FACTORY_MANUAL_CRAFT_TABLE_PATH =          DATA_FOLDER_PATH + "FactoryManualCraftTable.json"
-FACTORY_HUB_CRAFT_TABLE_PATH =             DATA_FOLDER_PATH + "FactoryHubCraftTable.json"
-FACTORY_MACHINE_CRAFTER_TABLE_PATH =       DATA_FOLDER_PATH + "FactoryMachineCrafterTable.json"
-FACTORY_FUEL_ITEM_TABLE_PATH =             DATA_FOLDER_PATH + "FactoryFuelItemTable.json"
-FACTORY_POWER_STATION_TABLE_PATH =         DATA_FOLDER_PATH + "FactoryPowerStationTable.json"
-FACTORY_MINER_TABLE_PATH =                 DATA_FOLDER_PATH + "FactoryMinerTable.json"
-FACTORY_BUILDING_ITEM_REVERSE_TABLE_PATH = DATA_FOLDER_PATH + "FactoryBuildingItemReverseTable.json"
-FACTORY_FLUID_PUMP_IN_TABLE_PATH =         DATA_FOLDER_PATH + "FactoryFluidPumpInTable.json"
-ITEM_TYPE_TABLE_PATH =                     DATA_FOLDER_PATH + "ItemTypeTable.json"
-WIKI_GROUP_TABLE_PATH =                    DATA_FOLDER_PATH + "WikiGroupTable.json"
-WIKI_ENTRY_DATA_TABLE_PATH =               DATA_FOLDER_PATH + "WikiEntryDataTable.json"
-
-# output files
-MACHINE_CRAFT_TABLE_PATH =    OUT_FOLDER_PATH + "machineCrafts.json"
-MACHINE_CRAFT_GROUP_PATH =    OUT_FOLDER_PATH + "machineCraftGroups.json"
-MACHINE_CRAFTERS_PATH =       OUT_FOLDER_PATH + "crafters.json"
-FUEL_PATH =                   OUT_FOLDER_PATH + "fuel.json"
-POWER_STATIONS_PATH =         OUT_FOLDER_PATH + "powerStations.json"
-MINERS_PATH =                 OUT_FOLDER_PATH + "miners.json"
-FLUID_PUMPS_PATH =            OUT_FOLDER_PATH + "fluidPumps.json"
-BUILDINGS_PATH =              OUT_FOLDER_PATH + "buildings.json"
-ITEM_ID_TO_BUILDING_ID_PATH = OUT_FOLDER_PATH + "itemId2BuildingId.json"
-FULL_BOTTLES_PATH =           OUT_FOLDER_PATH + "fullBottles.json"
-MANUAL_CRAFTS_PATH =          OUT_FOLDER_PATH + "manualCrafts.json"
-BUILDING_CRAFTS_PATH =        OUT_FOLDER_PATH + "hubCrafts.json"
-ITEMS_PATH =                  OUT_FOLDER_PATH + "items.json"
-
-craft_table = get_json(FACTORY_MACHINE_CRAFT_TABLE_PATH)
-craft_group_table = get_json(FACTORY_MACHINE_CRAFT_GROUP_TABLE_PATH)
-crafters_table = get_json(FACTORY_MACHINE_CRAFTER_TABLE_PATH)
-fuel_item_table = get_json(FACTORY_FUEL_ITEM_TABLE_PATH)
-power_station_table = get_json(FACTORY_POWER_STATION_TABLE_PATH)
-miner_table = get_json(FACTORY_MINER_TABLE_PATH)
-building_item_reverse_table = get_json(FACTORY_BUILDING_ITEM_REVERSE_TABLE_PATH)
-fluid_pump_in_table = get_json(FACTORY_FLUID_PUMP_IN_TABLE_PATH)
-full_bottle_table = get_json(FULL_BOTTLE_TABLE_PATH)
-manual_craft_table = get_json(FACTORY_MANUAL_CRAFT_TABLE_PATH)
-hub_craft_table = get_json(FACTORY_HUB_CRAFT_TABLE_PATH)
-item_table = get_json(ITEM_TABLE_PATH)
-item_type_table = get_json(ITEM_TYPE_TABLE_PATH)
-wiki_group_table = get_json(WIKI_GROUP_TABLE_PATH)
-wiki_entry_data_table = get_json(WIKI_ENTRY_DATA_TABLE_PATH)
-
-en = get_json(EN_PATH)
-ru = get_json(RU_PATH)
+en = get_json(paths.EN_PATH)
+ru = get_json(paths.RU_PATH)
 
 
 buildings = {}
@@ -338,18 +289,108 @@ for item_id in all_items:
     }
 
 
+save_json(machine_crafts, paths.MACHINE_CRAFT_TABLE_PATH)
+save_json(machine_craft_groups, paths.MACHINE_CRAFT_GROUP_PATH)
+save_json(machine_crafters, paths.MACHINE_CRAFTERS_PATH)
+save_json(fuel, paths.FUEL_PATH)
+save_json(power_stations, paths.POWER_STATIONS_PATH)
+save_json(miners, paths.MINERS_PATH)
+save_json(buildings, paths.BUILDINGS_PATH)
+save_json(item_id_to_building_id, paths.ITEM_ID_TO_BUILDING_ID_PATH)
+save_json(fluid_pumps, paths.FLUID_PUMPS_PATH)
+save_json(full_bottles, paths.FULL_BOTTLES_PATH)
+save_json(manual_crafts, paths.MANUAL_CRAFTS_PATH)
+save_json(building_crafts, paths.BUILDING_CRAFTS_PATH)
+save_json(items, paths.ITEMS_PATH)
+
+# locales
+
+items_i18n_id = {}
+for i in items.keys():
+    id = i
+    name_id = str(item_table[id]["name"]["id"])
+
+    items_i18n_id[id] = {
+        "nameId": name_id
+    }
+
+buildings_i18n_id = {}
+for i in buildings.keys():
+    id = i
+    name_id = str(building_table[id]["name"]["id"])
+
+    buildings_i18n_id[id] = {
+        "nameId": name_id
+    }
+
+item_groups_i18n_id = {
+    "nature": {"nameId": 4705594465915771189},
+    "gatherable": {"nameId": -9150267921727244148},
+    "product": {"nameId": 597830712374115114},
+    "usable": {"nameId": -4607626685843896299},
+    "facility": {"nameId": -6016389103269425768}
+}
 
 
-save_json(machine_crafts, MACHINE_CRAFT_TABLE_PATH)
-save_json(machine_craft_groups, MACHINE_CRAFT_GROUP_PATH)
-save_json(machine_crafters, MACHINE_CRAFTERS_PATH)
-save_json(fuel, FUEL_PATH)
-save_json(power_stations, POWER_STATIONS_PATH)
-save_json(miners, MINERS_PATH)
-save_json(buildings, BUILDINGS_PATH)
-save_json(item_id_to_building_id, ITEM_ID_TO_BUILDING_ID_PATH)
-save_json(fluid_pumps, FLUID_PUMPS_PATH)
-save_json(full_bottles, FULL_BOTTLES_PATH)
-save_json(manual_crafts, MANUAL_CRAFTS_PATH)
-save_json(building_crafts, BUILDING_CRAFTS_PATH)
-save_json(items, ITEMS_PATH)
+
+def save_locales(input_path: Path, output_folder_path: Path):
+    locales = get_json(input_path)
+
+    items_i18n = {}
+    for item_id, obj in items_i18n_id.items():
+        name_id = str(obj["nameId"])
+
+        name = locales[name_id]
+
+        items_i18n[item_id] = {
+            "name": name
+        }
+    
+    for item_id, obj in full_bottles.items():
+        liquid_id = obj["liquidId"]
+        empty_bottle_id = obj["emptyBottleId"]
+
+        liquid_name = items_i18n[liquid_id]["name"]
+        empty_bottle_name = items_i18n[empty_bottle_id]["name"]
+
+        items_i18n[item_id]["name"] = f"{empty_bottle_name} ({liquid_name})"
+    
+    buildings_i18n = {}
+    for building_id, obj in buildings_i18n_id.items():
+        name_id = str(obj["nameId"])
+
+        name = locales[name_id]
+
+        buildings_i18n[building_id] = {
+            "name": name
+        }
+    
+    item_groups_i18n = {}
+    for item_group_id, obj in item_groups_i18n_id.items():
+        name_id = str(obj["nameId"])
+
+        name = locales[name_id]
+
+        item_groups_i18n[item_group_id] = {
+            "name": name
+        }
+    
+    save_json(items_i18n, output_folder_path / "items.json")
+    save_json(buildings_i18n, output_folder_path / "buildings.json")
+    save_json(item_groups_i18n, output_folder_path / "itemGroups.json")
+
+
+save_locales(paths.DE_PATH, paths.DE_OUT_PATH)
+save_locales(paths.EN_PATH, paths.EN_OUT_PATH)
+save_locales(paths.MX_PATH, paths.ES_OUT_PATH)
+save_locales(paths.FR_PATH, paths.FR_OUT_PATH)
+save_locales(paths.ID_PATH, paths.ID_OUT_PATH)
+save_locales(paths.IT_PATH, paths.IT_OUT_PATH)
+save_locales(paths.JP_PATH, paths.JA_OUT_PATH)
+save_locales(paths.KR_PATH, paths.KO_OUT_PATH)
+save_locales(paths.BR_PATH, paths.PT_OUT_PATH)
+save_locales(paths.RU_PATH, paths.RU_OUT_PATH)
+save_locales(paths.TH_PATH, paths.TH_OUT_PATH)
+save_locales(paths.VN_PATH, paths.VI_OUT_PATH)
+save_locales(paths.CN_PATH, paths.ZHCN_OUT_PATH)
+save_locales(paths.TC_PATH, paths.ZHTW_OUT_PATH)

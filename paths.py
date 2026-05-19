@@ -1,0 +1,71 @@
+from pathlib import Path
+
+
+DATA_FOLDER_PATH = Path("./data")
+OUT_FOLDER_PATH = Path("./out")
+OUT_LOCALES_FOLDER_PATH = OUT_FOLDER_PATH / "locales"
+
+# input locales
+BR_PATH = DATA_FOLDER_PATH / "I18nTextTable_BR.json"
+CN_PATH = DATA_FOLDER_PATH / "I18nTextTable_CN.json"
+DE_PATH = DATA_FOLDER_PATH / "I18nTextTable_DE.json"
+EN_PATH = DATA_FOLDER_PATH / "I18nTextTable_EN.json"
+FR_PATH = DATA_FOLDER_PATH / "I18nTextTable_FR.json"
+ID_PATH = DATA_FOLDER_PATH / "I18nTextTable_ID.json"
+IT_PATH = DATA_FOLDER_PATH / "I18nTextTable_IT.json"
+JP_PATH = DATA_FOLDER_PATH / "I18nTextTable_JP.json"
+KR_PATH = DATA_FOLDER_PATH / "I18nTextTable_KR.json"
+MX_PATH = DATA_FOLDER_PATH / "I18nTextTable_MX.json"
+RU_PATH = DATA_FOLDER_PATH / "I18nTextTable_RU.json"
+TC_PATH = DATA_FOLDER_PATH / "I18nTextTable_TC.json"
+TH_PATH = DATA_FOLDER_PATH / "I18nTextTable_TH.json"
+VN_PATH = DATA_FOLDER_PATH / "I18nTextTable_VN.json"
+
+#output locales
+DE_OUT_PATH = OUT_LOCALES_FOLDER_PATH / "de"
+EN_OUT_PATH = OUT_LOCALES_FOLDER_PATH / "en"
+ES_OUT_PATH = OUT_LOCALES_FOLDER_PATH / "es"
+FR_OUT_PATH = OUT_LOCALES_FOLDER_PATH / "fr"
+ID_OUT_PATH = OUT_LOCALES_FOLDER_PATH / "id"
+IT_OUT_PATH = OUT_LOCALES_FOLDER_PATH / "it"
+JA_OUT_PATH = OUT_LOCALES_FOLDER_PATH / "ja"
+KO_OUT_PATH = OUT_LOCALES_FOLDER_PATH / "ko"
+PT_OUT_PATH = OUT_LOCALES_FOLDER_PATH / "pt"
+RU_OUT_PATH = OUT_LOCALES_FOLDER_PATH / "ru"
+TH_OUT_PATH = OUT_LOCALES_FOLDER_PATH / "th"
+VI_OUT_PATH = OUT_LOCALES_FOLDER_PATH / "vi"
+ZHCN_OUT_PATH = OUT_LOCALES_FOLDER_PATH / "zhcn"
+ZHTW_OUT_PATH = OUT_LOCALES_FOLDER_PATH / "zhtw"
+
+# input files
+ITEM_TABLE_PATH =                          DATA_FOLDER_PATH / "ItemTable.json"
+FULL_BOTTLE_TABLE_PATH =                   DATA_FOLDER_PATH / "FullBottleTable.json"
+FACTORY_MACHINE_CRAFT_TABLE_PATH =         DATA_FOLDER_PATH / "FactoryMachineCraftTable.json"
+FACTORY_MACHINE_CRAFT_GROUP_TABLE_PATH =   DATA_FOLDER_PATH / "FactoryMachineCraftGroupTable.json"
+FACTORY_MANUAL_CRAFT_TABLE_PATH =          DATA_FOLDER_PATH / "FactoryManualCraftTable.json"
+FACTORY_HUB_CRAFT_TABLE_PATH =             DATA_FOLDER_PATH / "FactoryHubCraftTable.json"
+FACTORY_MACHINE_CRAFTER_TABLE_PATH =       DATA_FOLDER_PATH / "FactoryMachineCrafterTable.json"
+FACTORY_FUEL_ITEM_TABLE_PATH =             DATA_FOLDER_PATH / "FactoryFuelItemTable.json"
+FACTORY_POWER_STATION_TABLE_PATH =         DATA_FOLDER_PATH / "FactoryPowerStationTable.json"
+FACTORY_MINER_TABLE_PATH =                 DATA_FOLDER_PATH / "FactoryMinerTable.json"
+FACTORY_BUILDING_ITEM_REVERSE_TABLE_PATH = DATA_FOLDER_PATH / "FactoryBuildingItemReverseTable.json"
+FACTORY_FLUID_PUMP_IN_TABLE_PATH =         DATA_FOLDER_PATH / "FactoryFluidPumpInTable.json"
+ITEM_TYPE_TABLE_PATH =                     DATA_FOLDER_PATH / "ItemTypeTable.json"
+WIKI_GROUP_TABLE_PATH =                    DATA_FOLDER_PATH / "WikiGroupTable.json"
+WIKI_ENTRY_DATA_TABLE_PATH =               DATA_FOLDER_PATH / "WikiEntryDataTable.json"
+FACTORY_BUILDING_TABLE_PATH =              DATA_FOLDER_PATH / "FactoryBuildingTable.json"
+
+# output files
+MACHINE_CRAFT_TABLE_PATH =    OUT_FOLDER_PATH / "machineCrafts.json"
+MACHINE_CRAFT_GROUP_PATH =    OUT_FOLDER_PATH / "machineCraftGroups.json"
+MACHINE_CRAFTERS_PATH =       OUT_FOLDER_PATH / "crafters.json"
+FUEL_PATH =                   OUT_FOLDER_PATH / "fuel.json"
+POWER_STATIONS_PATH =         OUT_FOLDER_PATH / "powerStations.json"
+MINERS_PATH =                 OUT_FOLDER_PATH / "miners.json"
+FLUID_PUMPS_PATH =            OUT_FOLDER_PATH / "fluidPumps.json"
+BUILDINGS_PATH =              OUT_FOLDER_PATH / "buildings.json"
+ITEM_ID_TO_BUILDING_ID_PATH = OUT_FOLDER_PATH / "itemId2BuildingId.json"
+FULL_BOTTLES_PATH =           OUT_FOLDER_PATH / "fullBottles.json"
+MANUAL_CRAFTS_PATH =          OUT_FOLDER_PATH / "manualCrafts.json"
+BUILDING_CRAFTS_PATH =        OUT_FOLDER_PATH / "hubCrafts.json"
+ITEMS_PATH =                  OUT_FOLDER_PATH / "items.json"
