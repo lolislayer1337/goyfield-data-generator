@@ -3,49 +3,58 @@ import json
 from utils import get_json, save_json
 
 
+DATA_FOLDER_PATH = "./data/"
+OUT_FOLDER_PATH = "./out/"
+
 # input locales
-BR_PATH = "./data/I18nTextTable_BR.json"
-CN_PATH = "./data/I18nTextTable_CN.json"
-DE_PATH = "./data/I18nTextTable_DE.json"
-EN_PATH = "./data/I18nTextTable_EN.json"
-FR_PATH = "./data/I18nTextTable_FR.json"
-ID_PATH = "./data/I18nTextTable_ID.json"
-IT_PATH = "./data/I18nTextTable_IT.json"
-JP_PATH = "./data/I18nTextTable_JP.json"
-KR_PATH = "./data/I18nTextTable_KR.json"
-MX_PATH = "./data/I18nTextTable_MX.json"
-RU_PATH = "./data/I18nTextTable_RU.json"
-TC_PATH = "./data/I18nTextTable_TC.json"
-TH_PATH = "./data/I18nTextTable_TH.json"
-VN_PATH = "./data/I18nTextTable_VN.json"
+BR_PATH = DATA_FOLDER_PATH + "I18nTextTable_BR.json"
+CN_PATH = DATA_FOLDER_PATH + "I18nTextTable_CN.json"
+DE_PATH = DATA_FOLDER_PATH + "I18nTextTable_DE.json"
+EN_PATH = DATA_FOLDER_PATH + "I18nTextTable_EN.json"
+FR_PATH = DATA_FOLDER_PATH + "I18nTextTable_FR.json"
+ID_PATH = DATA_FOLDER_PATH + "I18nTextTable_ID.json"
+IT_PATH = DATA_FOLDER_PATH + "I18nTextTable_IT.json"
+JP_PATH = DATA_FOLDER_PATH + "I18nTextTable_JP.json"
+KR_PATH = DATA_FOLDER_PATH + "I18nTextTable_KR.json"
+MX_PATH = DATA_FOLDER_PATH + "I18nTextTable_MX.json"
+RU_PATH = DATA_FOLDER_PATH + "I18nTextTable_RU.json"
+TC_PATH = DATA_FOLDER_PATH + "I18nTextTable_TC.json"
+TH_PATH = DATA_FOLDER_PATH + "I18nTextTable_TH.json"
+VN_PATH = DATA_FOLDER_PATH + "I18nTextTable_VN.json"
+
+#output locales
 
 # input files
-ITEM_TABLE_PATH = "./data/ItemTable.json"
-FULL_BOTTLE_TABLE_PATH = "./data/FullBottleTable.json"
-FACTORY_MACHINE_CRAFT_TABLE_PATH = "./data/FactoryMachineCraftTable.json"
-FACTORY_MACHINE_CRAFT_GROUP_TABLE_PATH = "./data/FactoryMachineCraftGroupTable.json"
-FACTORY_MANUAL_CRAFT_TABLE_PATH = "./data/FactoryManualCraftTable.json"
-FACTORY_HUB_CRAFT_TABLE_PATH = "./data/FactoryHubCraftTable.json"
-FACTORY_MACHINE_CRAFTER_TABLE_PATH = "./data/FactoryMachineCrafterTable.json"
-FACTORY_FUEL_ITEM_TABLE_PATH = "./data/FactoryFuelItemTable.json"
-FACTORY_POWER_STATION_TABLE_PATH = "./data/FactoryPowerStationTable.json"
-FACTORY_MINER_TABLE_PATH = "./data/FactoryMinerTable.json"
-FACTORY_BUILDING_ITEM_REVERSE_TABLE_PATH = "./data/FactoryBuildingItemReverseTable.json"
-FACTORY_FLUID_PUMP_IN_TABLE = "./data/FactoryFluidPumpInTable.json"
+ITEM_TABLE_PATH =                          DATA_FOLDER_PATH + "ItemTable.json"
+FULL_BOTTLE_TABLE_PATH =                   DATA_FOLDER_PATH + "FullBottleTable.json"
+FACTORY_MACHINE_CRAFT_TABLE_PATH =         DATA_FOLDER_PATH + "FactoryMachineCraftTable.json"
+FACTORY_MACHINE_CRAFT_GROUP_TABLE_PATH =   DATA_FOLDER_PATH + "FactoryMachineCraftGroupTable.json"
+FACTORY_MANUAL_CRAFT_TABLE_PATH =          DATA_FOLDER_PATH + "FactoryManualCraftTable.json"
+FACTORY_HUB_CRAFT_TABLE_PATH =             DATA_FOLDER_PATH + "FactoryHubCraftTable.json"
+FACTORY_MACHINE_CRAFTER_TABLE_PATH =       DATA_FOLDER_PATH + "FactoryMachineCrafterTable.json"
+FACTORY_FUEL_ITEM_TABLE_PATH =             DATA_FOLDER_PATH + "FactoryFuelItemTable.json"
+FACTORY_POWER_STATION_TABLE_PATH =         DATA_FOLDER_PATH + "FactoryPowerStationTable.json"
+FACTORY_MINER_TABLE_PATH =                 DATA_FOLDER_PATH + "FactoryMinerTable.json"
+FACTORY_BUILDING_ITEM_REVERSE_TABLE_PATH = DATA_FOLDER_PATH + "FactoryBuildingItemReverseTable.json"
+FACTORY_FLUID_PUMP_IN_TABLE_PATH =         DATA_FOLDER_PATH + "FactoryFluidPumpInTable.json"
+ITEM_TYPE_TABLE_PATH =                     DATA_FOLDER_PATH + "ItemTypeTable.json"
+WIKI_GROUP_TABLE_PATH =                    DATA_FOLDER_PATH + "WikiGroupTable.json"
+WIKI_ENTRY_DATA_TABLE_PATH =               DATA_FOLDER_PATH + "WikiEntryDataTable.json"
 
 # output files
-MACHINE_CRAFT_TABLE_PATH = "./out/machineCrafts.json"
-MACHINE_CRAFT_GROUP_PATH = "./out/machineCraftGroups.json"
-MACHINE_CRAFTERS_PATH = "./out/crafters.json"
-FUEL_PATH = "./out/fuel.json"
-POWER_STATIONS_PATH = "./out/powerStations.json"
-MINERS_PATH = "./out/miners.json"
-FLUID_PUMPS_PATH = "./out/fluidPumps.json"
-BUILDINGS_PATH = "./out/buildings.json"
-ITEM_ID_TO_BUILDING_ID_PATH = "./out/itemId2BuildingId.json"
-FULL_BOTTLES_PATH = "./out/fullBottles.json"
-MANUAL_CRAFTS_PATH = "./out/manualCrafts.json"
-BUILDING_CRAFTS_PATH = "./out/hubCrafts.json"
+MACHINE_CRAFT_TABLE_PATH =    OUT_FOLDER_PATH + "machineCrafts.json"
+MACHINE_CRAFT_GROUP_PATH =    OUT_FOLDER_PATH + "machineCraftGroups.json"
+MACHINE_CRAFTERS_PATH =       OUT_FOLDER_PATH + "crafters.json"
+FUEL_PATH =                   OUT_FOLDER_PATH + "fuel.json"
+POWER_STATIONS_PATH =         OUT_FOLDER_PATH + "powerStations.json"
+MINERS_PATH =                 OUT_FOLDER_PATH + "miners.json"
+FLUID_PUMPS_PATH =            OUT_FOLDER_PATH + "fluidPumps.json"
+BUILDINGS_PATH =              OUT_FOLDER_PATH + "buildings.json"
+ITEM_ID_TO_BUILDING_ID_PATH = OUT_FOLDER_PATH + "itemId2BuildingId.json"
+FULL_BOTTLES_PATH =           OUT_FOLDER_PATH + "fullBottles.json"
+MANUAL_CRAFTS_PATH =          OUT_FOLDER_PATH + "manualCrafts.json"
+BUILDING_CRAFTS_PATH =        OUT_FOLDER_PATH + "hubCrafts.json"
+ITEMS_PATH =                  OUT_FOLDER_PATH + "items.json"
 
 craft_table = get_json(FACTORY_MACHINE_CRAFT_TABLE_PATH)
 craft_group_table = get_json(FACTORY_MACHINE_CRAFT_GROUP_TABLE_PATH)
@@ -54,10 +63,17 @@ fuel_item_table = get_json(FACTORY_FUEL_ITEM_TABLE_PATH)
 power_station_table = get_json(FACTORY_POWER_STATION_TABLE_PATH)
 miner_table = get_json(FACTORY_MINER_TABLE_PATH)
 building_item_reverse_table = get_json(FACTORY_BUILDING_ITEM_REVERSE_TABLE_PATH)
-fluid_pump_in_table = get_json(FACTORY_FLUID_PUMP_IN_TABLE)
+fluid_pump_in_table = get_json(FACTORY_FLUID_PUMP_IN_TABLE_PATH)
 full_bottle_table = get_json(FULL_BOTTLE_TABLE_PATH)
 manual_craft_table = get_json(FACTORY_MANUAL_CRAFT_TABLE_PATH)
 hub_craft_table = get_json(FACTORY_HUB_CRAFT_TABLE_PATH)
+item_table = get_json(ITEM_TABLE_PATH)
+item_type_table = get_json(ITEM_TYPE_TABLE_PATH)
+wiki_group_table = get_json(WIKI_GROUP_TABLE_PATH)
+wiki_entry_data_table = get_json(WIKI_ENTRY_DATA_TABLE_PATH)
+
+en = get_json(EN_PATH)
+ru = get_json(RU_PATH)
 
 
 buildings = {}
@@ -286,6 +302,46 @@ for building_id, obj in buildings.items():
     item_id_to_building_id[item_id] = building_id
 
 
+item_categories = {
+    "wiki_group_item_nature": "nature",
+    "wiki_group_item_material": "gatherable",
+    "wiki_group_item_product": "product",
+    "wiki_group_item_usable": "usable",
+
+}
+for obj in wiki_group_table["wiki_type_building"]["list"]:
+    item_categories[obj["groupId"]] = "facility"
+
+item_id_to_group_id = {}
+for obj in wiki_entry_data_table.values():
+    item_id = obj["refItemId"]
+    group_id = obj["groupId"]
+
+    if item_id == "": continue
+    if group_id not in item_categories: continue
+
+    item_id_to_group_id[item_id] = item_categories[group_id]
+
+
+items = {}
+for item_id in all_items:
+    obj = item_table[item_id]
+
+    id = obj["id"]
+    icon_id = obj["iconId"]
+    rarity = obj["rarity"]
+    group_id = item_id_to_group_id[item_id]
+
+    items[id] = {
+        "id": id,
+        "iconId": icon_id,
+        "rarity": rarity,
+        "groupId": group_id
+    }
+
+
+
+
 save_json(machine_crafts, MACHINE_CRAFT_TABLE_PATH)
 save_json(machine_craft_groups, MACHINE_CRAFT_GROUP_PATH)
 save_json(machine_crafters, MACHINE_CRAFTERS_PATH)
@@ -298,3 +354,4 @@ save_json(fluid_pumps, FLUID_PUMPS_PATH)
 save_json(full_bottles, FULL_BOTTLES_PATH)
 save_json(manual_crafts, MANUAL_CRAFTS_PATH)
 save_json(building_crafts, BUILDING_CRAFTS_PATH)
+save_json(items, ITEMS_PATH)
