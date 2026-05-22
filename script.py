@@ -202,7 +202,7 @@ miners = {}
 for building_id, obj in miner_table.items():
     id = obj["id"]
     mining_time_ms = obj["msPerRound"]
-    mineable = []
+    mineable = {}
     
     for i in obj["mineable"]:
         temp = {
@@ -214,7 +214,7 @@ for building_id, obj in miner_table.items():
                 "itemId": i["consumeItem"]["id"],
                 "count": i["consumeItem"]["count"]
             }
-        mineable.append(temp)
+        mineable[temp["miningItemId"]] = temp
 
     miners[id] = {
         "id": id,
