@@ -3,6 +3,7 @@ from pathlib import Path
 
 DATA_FOLDER_PATH = Path("./data")
 OUT_FOLDER_PATH = Path("./out")
+OUT_DATA_FOLDER_PATH = OUT_FOLDER_PATH / "data"
 OUT_LOCALES_FOLDER_PATH = OUT_FOLDER_PATH / "locales"
 
 # input locales
@@ -56,16 +57,16 @@ WIKI_ENTRY_DATA_TABLE_PATH =               DATA_FOLDER_PATH / "WikiEntryDataTabl
 FACTORY_BUILDING_TABLE_PATH =              DATA_FOLDER_PATH / "FactoryBuildingTable.json"
 
 # output files
-MACHINE_CRAFT_TABLE_PATH =    OUT_FOLDER_PATH / "machineCrafts.json"
-MACHINE_CRAFT_GROUP_PATH =    OUT_FOLDER_PATH / "machineCraftGroups.json"
-MACHINE_CRAFTERS_PATH =       OUT_FOLDER_PATH / "crafters.json"
-FUEL_PATH =                   OUT_FOLDER_PATH / "fuel.json"
-POWER_STATIONS_PATH =         OUT_FOLDER_PATH / "powerStations.json"
-MINERS_PATH =                 OUT_FOLDER_PATH / "miners.json"
-FLUID_PUMPS_PATH =            OUT_FOLDER_PATH / "fluidPumps.json"
-BUILDINGS_PATH =              OUT_FOLDER_PATH / "buildings.json"
-ITEM_ID_TO_BUILDING_ID_PATH = OUT_FOLDER_PATH / "itemId2BuildingId.json"
-FULL_BOTTLES_PATH =           OUT_FOLDER_PATH / "fullBottles.json"
-MANUAL_CRAFTS_PATH =          OUT_FOLDER_PATH / "manualCrafts.json"
-BUILDING_CRAFTS_PATH =        OUT_FOLDER_PATH / "hubCrafts.json"
-ITEMS_PATH =                  OUT_FOLDER_PATH / "items.json"
+MACHINE_CRAFT_TABLE_PATH =    OUT_DATA_FOLDER_PATH / "machineCrafts.json"
+MACHINE_CRAFT_GROUP_PATH =    OUT_DATA_FOLDER_PATH / "machineCraftGroups.json"
+MACHINE_CRAFTERS_PATH =       OUT_DATA_FOLDER_PATH / "crafters.json"
+FUEL_PATH =                   OUT_DATA_FOLDER_PATH / "fuel.json"
+POWER_STATIONS_PATH =         OUT_DATA_FOLDER_PATH / "powerStations.json"
+MINERS_PATH =                 OUT_DATA_FOLDER_PATH / "miners.json"
+FLUID_PUMPS_PATH =            OUT_DATA_FOLDER_PATH / "fluidPumps.json"
+BUILDINGS_PATH =              OUT_DATA_FOLDER_PATH / "buildings.json"
+ITEM_ID_TO_BUILDING_ID_PATH = OUT_DATA_FOLDER_PATH / "itemId2BuildingId.json"
+FULL_BOTTLES_PATH =           OUT_DATA_FOLDER_PATH / "fullBottles.json"
+MANUAL_CRAFTS_PATH =          OUT_DATA_FOLDER_PATH / "manualCrafts.json"
+BUILDING_CRAFTS_PATH =        OUT_DATA_FOLDER_PATH / "hubCrafts.json"
+ITEMS_PATH =                  OUT_DATA_FOLDER_PATH / "items.json"
