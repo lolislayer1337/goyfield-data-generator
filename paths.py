@@ -59,6 +59,7 @@ ITEM_TYPE_TABLE_PATH =                     DATA_FOLDER_PATH / "ItemTypeTable.jso
 WIKI_GROUP_TABLE_PATH =                    DATA_FOLDER_PATH / "WikiGroupTable.json"
 WIKI_ENTRY_DATA_TABLE_PATH =               DATA_FOLDER_PATH / "WikiEntryDataTable.json"
 FACTORY_BUILDING_TABLE_PATH =              DATA_FOLDER_PATH / "FactoryBuildingTable.json"
+LIQUID_TABLE_PATH =                        DATA_FOLDER_PATH / "LiquidTable.json"
 
 # output files
 MACHINE_CRAFT_TABLE_PATH =    OUT_DATA_FOLDER_PATH / "machineCrafts.json"
@@ -74,3 +75,6 @@ FULL_BOTTLES_PATH =           OUT_DATA_FOLDER_PATH / "fullBottles.json"
 MANUAL_CRAFTS_PATH =          OUT_DATA_FOLDER_PATH / "manualCrafts.json"
 BUILDING_CRAFTS_PATH =        OUT_DATA_FOLDER_PATH / "hubCrafts.json"
 ITEMS_PATH =                  OUT_DATA_FOLDER_PATH / "items.json"
+ITEM_GROUPS_PATH =            OUT_DATA_FOLDER_PATH / "itemGroups.json"
+CRAFTABLE_ITEMS_PATH =        OUT_DATA_FOLDER_PATH / "craftableItems.json"
+ITEM_SUB_GROUP_LIST_PATH =    OUT_DATA_FOLDER_PATH / "itemSubGroupList.json"

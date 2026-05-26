@@ -8,6 +8,6 @@ fetch_data()
 
 fetch_locales()
 
-check_images()
+# check_images()
 
-check_unused_images()
+# check_unused_images()

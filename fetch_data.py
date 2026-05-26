@@ -247,6 +247,10 @@ def fetch_data():
         obj["itemId"] = item_id
         item_id_to_building_id[item_id] = building_id
 
+
+    craftable_items = sorted(list(all_items.copy()))
+
+
     for building_id, obj in buildings.items():
         icon_id = building_table[building_id]["iconOnPanel"]
         obj["iconId"] = icon_id
@@ -290,6 +294,155 @@ def fetch_data():
         }
 
 
+    for item in [v for v in items.values() if v["groupId"] == "gatherable"]:
+        item_id: str = item["id"]
+
+        if item_id.startswith("item_drop_"):
+            items[item_id]["subGroupId"] = "drop"
+        
+        if item_id.startswith("item_muck_"):
+            items[item_id]["subGroupId"] = "muck"
+
+        if item_id.startswith("item_plant_"):
+            items[item_id]["subGroupId"] = "plant"
+    
+    for item in [v for v in items.values() if v["groupId"] == "product"]:
+        item_id: str = item["id"]
+
+        if "_powder" in item_id:
+            items[item_id]["subGroupId"] = "powder"
+
+        if item_id.startswith("item_xiranite"):
+            items[item_id]["subGroupId"] = "xiranite"
+        
+        if item_id.startswith("item_activity_xiranite"):
+            items[item_id]["subGroupId"] = "activityXiranite"
+        
+        if item_id.startswith("item_carbon"):
+            items[item_id]["subGroupId"] = "carbon"
+
+        if item_id.startswith("item_copper"):
+            items[item_id]["subGroupId"] = "copper"
+
+        if item_id.startswith("item_crystal") or item_id.startswith("item_originium"):
+            items[item_id]["subGroupId"] = "originium"
+        
+        if item_id.startswith("item_glass") or item_id.startswith("item_quartz"):
+            items[item_id]["subGroupId"] = "amethyst"
+        
+        if item_id.startswith("item_iron"):
+            items[item_id]["subGroupId"] = "iron"
+        
+        if item_id.startswith("item_proc_battery"):
+            items[item_id]["subGroupId"] = "battery"
+        
+        if item_id.startswith("item_equip_script"):
+            items[item_id]["subGroupId"] = "component"
+        
+        if item_id.startswith("item_muck"):
+            items[item_id]["subGroupId"] = "muck"
+    
+    for item in [v for v in items.values() if v["groupId"] == "usable"]:
+        item_id: str = item["id"]
+
+        items[item_id]["subGroupId"] = "other"
+
+        if item_id.startswith("item_proc_bomb"):
+            items[item_id]["subGroupId"] = "bomb"
+        
+        if (item_id.startswith("item_bottled_flower") 
+            or item_id.startswith("item_bottled_food") 
+            or item_id.startswith("item_bottled_grass")
+            or item_id.startswith("item_bottled_rec_hp")):
+            items[item_id]["subGroupId"] = "bottledProdFood"
+        
+        if "_powder" in item_id:
+            items[item_id]["subGroupId"] = "powder"
+        
+    for item in [v for v in items.values() if v["groupId"] == "facility"]:
+        item_id: str = item["id"]
+
+        items[item_id]["subGroupId"] = "other"
+
+        if item_id.startswith("item_port_battle"):
+            items[item_id]["subGroupId"] = "battle"
+        
+        if item_id.startswith("item_port_soil"):
+            items[item_id]["subGroupId"] = "soil"
+
+    for item in [v for v in items.values() if v["groupId"] == "nature"]:
+        item_id: str = item["id"]
+
+        if "_ore" in item_id or "item_quartz_sand" in item_id:
+            items[item_id]["subGroupId"] = "ore"
+        
+        if item_id.startswith("item_plant_moss") or item_id.startswith("item_plant_bbflower"):
+            items[item_id]["subGroupId"] = "flowerPlant"
+        
+        if item_id.startswith("item_plant_grass"):
+            items[item_id]["subGroupId"] = "grassPlant"
+        
+        if item_id.startswith("item_plant_sp"):
+            items[item_id]["subGroupId"] = "soilPlant"
+        
+        if "_wood" in item_id:
+            items[item_id]["subGroupId"] = "wood"
+
+    for building in buildings.values():
+        building_type = building["type"]
+        item_id = building["itemId"]
+
+        if item_id == "item_port_furnance_nop_1": continue
+
+        items[item_id]["subGroupId"] = building_type
+    
+    for item in full_bottles.values():
+        fbottle_id = item["id"]
+        liquid_id = item["liquidId"]
+
+        items[fbottle_id]["subGroupId"] = "fullBottle"
+        items[liquid_id]["subGroupId"] = "liquid"
+
+
+    sub_groups = set()
+    for item in items.values():
+        if "subGroupId" not in item: continue
+
+        group_id = item["groupId"]
+        sub_group_id = item["subGroupId"]
+
+        item["subGroupId"] = f"{group_id}_{sub_group_id}"
+        sub_groups.add(f"{group_id}_{sub_group_id}")
+
+    item_groups = {}
+    for item in items.values():
+        item_id = item["id"]
+        group_id = item["groupId"]
+
+        if group_id not in item_groups:
+            item_groups[group_id] = { "withoutSubGroup": [] }
+        
+        if "subGroupId" in item:
+            sub_group_id = item["subGroupId"]
+
+            if sub_group_id not in item_groups[group_id]:
+                item_groups[group_id][sub_group_id] = []
+
+            item_groups[group_id][sub_group_id].append(item_id)
+        
+        else:
+            item_groups[group_id]["withoutSubGroup"].append(item_id)
+            item_groups[group_id]["withoutSubGroup"] = sorted(item_groups[group_id]["withoutSubGroup"])
+    
+
+    item_sub_group_list = sorted(list(sub_groups))
+
+    
+    items = dict(sorted(items.items(), key=lambda item: item[0]))
+    items = dict(sorted(items.items(), key=lambda item: item[1]["subGroupId"]))
+    items = dict(sorted(items.items(), key=lambda item: item[1]["groupId"]))
+
+
     save_json(machine_crafts, paths.MACHINE_CRAFT_TABLE_PATH)
     save_json(machine_craft_groups, paths.MACHINE_CRAFT_GROUP_PATH)
     save_json(machine_crafters, paths.MACHINE_CRAFTERS_PATH)
@@ -303,3 +456,6 @@ def fetch_data():
     save_json(manual_crafts, paths.MANUAL_CRAFTS_PATH)
     save_json(building_crafts, paths.BUILDING_CRAFTS_PATH)
     save_json(items, paths.ITEMS_PATH)
+    save_json(item_groups, paths.ITEM_GROUPS_PATH)
+    save_json(craftable_items, paths.CRAFTABLE_ITEMS_PATH)
+    save_json(item_sub_group_list, paths.ITEM_SUB_GROUP_LIST_PATH)
