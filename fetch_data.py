@@ -439,7 +439,6 @@ def fetch_data():
 
     
     items = dict(sorted(items.items(), key=lambda item: item[0]))
-    items = dict(sorted(items.items(), key=lambda item: item[1]["subGroupId"]))
     items = dict(sorted(items.items(), key=lambda item: item[1]["groupId"]))
 
 
