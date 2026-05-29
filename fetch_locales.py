@@ -37,6 +37,23 @@ def fetch_locales():
         "facility": {"nameId": -6016389103269425768}
     }
 
+    formula_sidebar_sectors_i18n_id = {
+        "source": 8728205821964282085,
+        "using": 1290870007086611211,
+        "availableFormulas": 5656908511856174302,
+        "resourceCollection": -7911655066442581825
+    }
+
+    formula_sidebar_craft_source_i18n_id = {
+        "hub": 320824384413358692,
+        "manual": 7367674283383897536
+    }
+
+    building_modes_i18n_id = {
+        "normal": -1513433052175505109,
+        "liquid": -3808386161719669037
+    }
+
 
 
     def save_locales(input_path: Path, output_folder_path: Path):
@@ -80,10 +97,27 @@ def fetch_locales():
             item_groups_i18n[item_group_id] = {
                 "name": name
             }
+
+        formula_sidebar_sectors_i18n = {k: locales[str(v)] for k, v in formula_sidebar_sectors_i18n_id.items()}
+        formula_sidebar_craft_source_i18n = {k: locales[str(v)] for k, v in formula_sidebar_craft_source_i18n_id.items()}
+        formula_sidebar_i18n = {
+            "sector": formula_sidebar_sectors_i18n,
+            "craftSource": formula_sidebar_craft_source_i18n
+        }
+
+        building_modes_i18n = {k: locales[str(v)] for k, v in building_modes_i18n_id.items()}
+
+        
+        item_names_i18n = {k: v["name"] for k, v in items_i18n.items()}
+        building_names_i18n = {k: v["name"] for k, v in buildings_i18n.items()}
         
         save_json(items_i18n, output_folder_path / "items.json")
         save_json(buildings_i18n, output_folder_path / "buildings.json")
         save_json(item_groups_i18n, output_folder_path / "itemGroups.json")
+        save_json(item_names_i18n, output_folder_path / "itemNames.json")
+        save_json(building_names_i18n, output_folder_path / "buildingNames.json")
+        save_json(formula_sidebar_i18n, output_folder_path / "formulaSidebar.json")
+        save_json(building_modes_i18n, output_folder_path / "buildingModes.json")
 
 
     save_locales(paths.DE_PATH, paths.DE_OUT_PATH)
