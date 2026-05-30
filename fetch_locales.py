@@ -10,6 +10,7 @@ def fetch_locales():
     items = get_json(paths.ITEMS_PATH)
     full_bottles = get_json(paths.FULL_BOTTLES_PATH)
     buildings = get_json(paths.BUILDINGS_PATH)
+    resource_points = get_json(paths.RESOURCE_POINTS_PATH)
 
     items_i18n_id = {}
     for i in items.keys():
@@ -53,6 +54,14 @@ def fetch_locales():
         "normal": -1513433052175505109,
         "liquid": -3808386161719669037
     }
+
+    resource_points_i18n_id = {}
+    for i in resource_points.keys():
+        name_id = str(item_table[i]["name"]["id"])
+
+        resource_points_i18n_id[i] = {
+            "nameId": name_id
+        }
 
 
 
@@ -110,6 +119,19 @@ def fetch_locales():
         
         item_names_i18n = {k: v["name"] for k, v in items_i18n.items()}
         building_names_i18n = {k: v["name"] for k, v in buildings_i18n.items()}
+
+        resource_points_i18n = {}
+        for point_id, obj in resource_points_i18n_id.items():
+            name_id = str(obj["nameId"])
+
+            name = locales[name_id]
+
+            resource_points_i18n[point_id] = {
+                "name": name
+            }
+        
+        resource_point_names_i18n = {k: v["name"] for k, v in resource_points_i18n.items()}
+        item_group_names_i18n = {k: v["name"] for k, v in item_groups_i18n.items()}
         
         save_json(items_i18n, output_folder_path / "items.json")
         save_json(buildings_i18n, output_folder_path / "buildings.json")
@@ -118,6 +140,9 @@ def fetch_locales():
         save_json(building_names_i18n, output_folder_path / "buildingNames.json")
         save_json(formula_sidebar_i18n, output_folder_path / "formulaSidebar.json")
         save_json(building_modes_i18n, output_folder_path / "buildingModes.json")
+        save_json(resource_points_i18n, output_folder_path / "resourcePoints.json")
+        save_json(resource_point_names_i18n, output_folder_path / "resourcePointNames.json")
+        save_json(item_group_names_i18n, output_folder_path / "itemGroupNames.json")
 
 
     save_locales(paths.DE_PATH, paths.DE_OUT_PATH)

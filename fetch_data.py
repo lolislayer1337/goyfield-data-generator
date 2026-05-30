@@ -5,21 +5,21 @@ from utils import get_json, save_json
 
 
 def fetch_data():
-    craft_table =                 get_json(paths.FACTORY_MACHINE_CRAFT_TABLE_PATH)
-    craft_group_table =           get_json(paths.FACTORY_MACHINE_CRAFT_GROUP_TABLE_PATH)
-    crafters_table =              get_json(paths.FACTORY_MACHINE_CRAFTER_TABLE_PATH)
-    fuel_item_table =             get_json(paths.FACTORY_FUEL_ITEM_TABLE_PATH)
-    power_station_table =         get_json(paths.FACTORY_POWER_STATION_TABLE_PATH)
-    miner_table =                 get_json(paths.FACTORY_MINER_TABLE_PATH)
-    building_item_reverse_table = get_json(paths.FACTORY_BUILDING_ITEM_REVERSE_TABLE_PATH)
-    fluid_pump_in_table =         get_json(paths.FACTORY_FLUID_PUMP_IN_TABLE_PATH)
-    full_bottle_table =           get_json(paths.FULL_BOTTLE_TABLE_PATH)
-    manual_craft_table =          get_json(paths.FACTORY_MANUAL_CRAFT_TABLE_PATH)
-    hub_craft_table =             get_json(paths.FACTORY_HUB_CRAFT_TABLE_PATH)
-    item_table =                  get_json(paths.ITEM_TABLE_PATH)
-    wiki_group_table =            get_json(paths.WIKI_GROUP_TABLE_PATH)
-    wiki_entry_data_table =       get_json(paths.WIKI_ENTRY_DATA_TABLE_PATH)
-    building_table =              get_json(paths.FACTORY_BUILDING_TABLE_PATH)
+    craft_table: dict =                 get_json(paths.FACTORY_MACHINE_CRAFT_TABLE_PATH)
+    craft_group_table: dict =           get_json(paths.FACTORY_MACHINE_CRAFT_GROUP_TABLE_PATH)
+    crafters_table: dict =              get_json(paths.FACTORY_MACHINE_CRAFTER_TABLE_PATH)
+    fuel_item_table: dict =             get_json(paths.FACTORY_FUEL_ITEM_TABLE_PATH)
+    power_station_table: dict =         get_json(paths.FACTORY_POWER_STATION_TABLE_PATH)
+    miner_table: dict =                 get_json(paths.FACTORY_MINER_TABLE_PATH)
+    building_item_reverse_table: dict = get_json(paths.FACTORY_BUILDING_ITEM_REVERSE_TABLE_PATH)
+    fluid_pump_in_table: dict =         get_json(paths.FACTORY_FLUID_PUMP_IN_TABLE_PATH)
+    full_bottle_table: dict =           get_json(paths.FULL_BOTTLE_TABLE_PATH)
+    manual_craft_table: dict =          get_json(paths.FACTORY_MANUAL_CRAFT_TABLE_PATH)
+    hub_craft_table: dict =             get_json(paths.FACTORY_HUB_CRAFT_TABLE_PATH)
+    item_table: dict =                  get_json(paths.ITEM_TABLE_PATH)
+    wiki_group_table: dict =            get_json(paths.WIKI_GROUP_TABLE_PATH)
+    wiki_entry_data_table: dict =       get_json(paths.WIKI_ENTRY_DATA_TABLE_PATH)
+    building_table: dict =              get_json(paths.FACTORY_BUILDING_TABLE_PATH)
 
 
     buildings = {}
@@ -441,6 +441,24 @@ def fetch_data():
     items = dict(sorted(items.items(), key=lambda item: item[0]))
     items = dict(sorted(items.items(), key=lambda item: item[1]["groupId"]))
 
+    resource_points = {}
+    for obj in [item for item in item_table.values() if item["type"] == 41 or item["type"] == 28]:
+        point_id = obj["id"]
+        item_id = obj["iconId"]
+        point_type = ""
+
+        if obj["type"] == 41:
+            point_type = "liquid"
+
+        if obj["type"] == 28:
+            point_type = "mine"
+
+        resource_points[point_id] = {
+            "id": point_id,
+            "itemId": item_id,
+            "type": point_type
+        }
+
 
     save_json(machine_crafts, paths.MACHINE_CRAFT_TABLE_PATH)
     save_json(machine_craft_groups, paths.MACHINE_CRAFT_GROUP_PATH)
@@ -458,3 +476,5 @@ def fetch_data():
     save_json(item_groups, paths.ITEM_GROUPS_PATH)
     save_json(craftable_items, paths.CRAFTABLE_ITEMS_PATH)
     save_json(item_sub_group_list, paths.ITEM_SUB_GROUP_LIST_PATH)
+    save_json(resource_points, paths.RESOURCE_POINTS_PATH)
+    
