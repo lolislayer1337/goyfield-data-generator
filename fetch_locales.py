@@ -42,12 +42,17 @@ def fetch_locales():
         "source": 8728205821964282085,
         "using": 1290870007086611211,
         "availableFormulas": 5656908511856174302,
+        "availableFunctions": -6601186077645679785,
         "resourceCollection": -7911655066442581825
     }
 
     formula_sidebar_craft_source_i18n_id = {
         "hub": 320824384413358692,
         "manual": 7367674283383897536
+    }
+
+    formula_sidebar_items_i18n_id = {
+        "power": -7228392636144364858
     }
 
     building_modes_i18n_id = {
@@ -109,9 +114,11 @@ def fetch_locales():
 
         formula_sidebar_sectors_i18n = {k: locales[str(v)] for k, v in formula_sidebar_sectors_i18n_id.items()}
         formula_sidebar_craft_source_i18n = {k: locales[str(v)] for k, v in formula_sidebar_craft_source_i18n_id.items()}
+        formula_sidebar_items_i18n = {k: locales[str(v)] for k, v in formula_sidebar_items_i18n_id.items()}
         formula_sidebar_i18n = {
             "sector": formula_sidebar_sectors_i18n,
-            "craftSource": formula_sidebar_craft_source_i18n
+            "craftSource": formula_sidebar_craft_source_i18n,
+            "items": formula_sidebar_items_i18n
         }
 
         building_modes_i18n = {k: locales[str(v)] for k, v in building_modes_i18n_id.items()}
