@@ -39,6 +39,67 @@ def merge_data():
     print("Data merging completed")
 
 
+def merge_locales():
+    print("Merging locales...")
+
+    merged_locales_folders_list: list[Path] = [
+        paths.MERGED_DE_PATH,
+        paths.MERGED_EN_PATH,
+        paths.MERGED_ES_PATH,
+        paths.MERGED_FR_PATH,
+        paths.MERGED_ID_PATH,
+        paths.MERGED_IT_PATH,
+        paths.MERGED_JA_PATH,
+        paths.MERGED_KO_PATH,
+        paths.MERGED_PT_PATH,
+        paths.MERGED_RU_PATH,
+        paths.MERGED_TH_PATH,
+        paths.MERGED_VI_PATH,
+        paths.MERGED_ZHCN_PATH,
+        paths.MERGED_ZHTW_PATH
+    ]
+
+    out_locales_folders_list: list[Path] = [
+        paths.DE_OUT_PATH,
+        paths.EN_OUT_PATH,
+        paths.ES_OUT_PATH,
+        paths.FR_OUT_PATH,
+        paths.ID_OUT_PATH,
+        paths.IT_OUT_PATH,
+        paths.JA_OUT_PATH,
+        paths.KO_OUT_PATH,
+        paths.PT_OUT_PATH,
+        paths.RU_OUT_PATH,
+        paths.TH_OUT_PATH,
+        paths.VI_OUT_PATH,
+        paths.ZHCN_OUT_PATH,
+        paths.ZHTW_OUT_PATH
+    ]
+
+    locales_files_list: list[str] = [
+        paths.ITEMS,
+        paths.BUILDINGS,
+        paths.ITEM_NAMES,
+        paths.BUILDING_NAMES,
+        paths.RESOURCE_POINTS,
+        paths.RESOURCE_POINT_NAMES
+    ]
+
+    for i in range(len(merged_locales_folders_list)):
+        merge_folder = merged_locales_folders_list[i]
+        out_folder = out_locales_folders_list[i]
+
+        for file_name in locales_files_list:
+            table_1 = get_json(out_folder / file_name)
+            table_2 = get_json(merge_folder / file_name)
+
+            new_table = merge(table_1, table_2)
+
+            save_json(new_table, merge_folder / file_name)
+
+    print("Locales merging completed")
+
+
 # if there is a conflict, table_1 takes precedence
 def merge(table_1: dict | list, table_2: dict | list):
     if isinstance(table_1, dict) and isinstance(table_2, dict):
