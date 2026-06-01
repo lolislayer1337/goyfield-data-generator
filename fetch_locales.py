@@ -140,15 +140,15 @@ def fetch_locales():
         resource_point_names_i18n = {k: v["name"] for k, v in resource_points_i18n.items()}
         item_group_names_i18n = {k: v["name"] for k, v in item_groups_i18n.items()}
         
-        save_json(items_i18n, output_folder_path / "items.json")
-        save_json(buildings_i18n, output_folder_path / "buildings.json")
+        save_json(items_i18n, output_folder_path / paths.ITEMS)
+        save_json(buildings_i18n, output_folder_path / paths.BUILDINGS)
         save_json(item_groups_i18n, output_folder_path / "itemGroups.json")
-        save_json(item_names_i18n, output_folder_path / "itemNames.json")
-        save_json(building_names_i18n, output_folder_path / "buildingNames.json")
+        save_json(item_names_i18n, output_folder_path / paths.ITEM_NAMES)
+        save_json(building_names_i18n, output_folder_path / paths.BUILDING_NAMES)
         save_json(formula_sidebar_i18n, output_folder_path / "formulaSidebar.json")
         save_json(building_modes_i18n, output_folder_path / "buildingModes.json")
-        save_json(resource_points_i18n, output_folder_path / "resourcePoints.json")
-        save_json(resource_point_names_i18n, output_folder_path / "resourcePointNames.json")
+        save_json(resource_points_i18n, output_folder_path / paths.RESOURCE_POINTS)
+        save_json(resource_point_names_i18n, output_folder_path / paths.RESOURCE_POINT_NAMES)
         save_json(item_group_names_i18n, output_folder_path / "itemGroupNames.json")
 
 
