@@ -5,8 +5,8 @@ from utils import get_json
 
 
 def check_images():
-    items: dict = get_json(paths.ITEMS_PATH)
-    buildings: dict = get_json(paths.BUILDINGS_PATH)
+    items: dict = get_json(paths.MERGED_ITEMS_PATH)
+    buildings: dict = get_json(paths.MERGED_BUILDINGS_PATH)
 
     item_icons = [item["iconId"] for item in items.values()]
     building_icons = [building["iconId"] for building in buildings.values()]
