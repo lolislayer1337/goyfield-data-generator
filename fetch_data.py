@@ -20,6 +20,7 @@ def fetch_data():
     wiki_group_table: dict =            get_json(paths.WIKI_GROUP_TABLE_PATH)
     wiki_entry_data_table: dict =       get_json(paths.WIKI_ENTRY_DATA_TABLE_PATH)
     building_table: dict =              get_json(paths.FACTORY_BUILDING_TABLE_PATH)
+    enemy_drop_table: dict =            get_json(paths.WIKI_ENEMY_DROP_TABLE_PATH)
 
 
     buildings = {}
@@ -249,6 +250,11 @@ def fetch_data():
 
 
     craftable_items = sorted(list(all_items.copy()))
+
+    for key, value in enemy_drop_table.items():
+        item_ids = value["dropItemIds"]
+        for item_id in item_ids:
+            all_items.add(item_id)
 
 
     for building_id, obj in buildings.items():

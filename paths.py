@@ -99,6 +99,7 @@ WIKI_GROUP_TABLE_PATH =                    DATA_FOLDER_PATH / "WikiGroupTable.js
 WIKI_ENTRY_DATA_TABLE_PATH =               DATA_FOLDER_PATH / "WikiEntryDataTable.json"
 FACTORY_BUILDING_TABLE_PATH =              DATA_FOLDER_PATH / "FactoryBuildingTable.json"
 LIQUID_TABLE_PATH =                        DATA_FOLDER_PATH / "LiquidTable.json"
+WIKI_ENEMY_DROP_TABLE_PATH =               DATA_FOLDER_PATH / "WikiEnemyDropTable.json"
 
 # output files
 MACHINE_CRAFT_TABLE_PATH =    OUT_DATA_FOLDER_PATH / MACHINE_CRAFTS
