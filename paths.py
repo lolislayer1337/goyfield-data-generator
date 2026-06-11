@@ -17,6 +17,7 @@ ITEM_ICONS_FOLDER_PATH = IMAGES_FOLDER_PATH / "items"
 ITEMS = "items.json"
 FULL_BOTTLES = "fullBottles.json"
 FUEL = "fuel.json"
+ITEM_FILTERS = "itemFilters.json"
 CRAFTABLE_ITEMS = "craftableItems.json"
 RESOURCE_POINTS = "resourcePoints.json"
 ITEM_ID_TO_BUILDING_ID = "itemId2BuildingId.json"
@@ -119,6 +120,9 @@ ITEM_GROUPS_PATH =            OUT_DATA_FOLDER_PATH / "itemGroups.json"
 CRAFTABLE_ITEMS_PATH =        OUT_DATA_FOLDER_PATH / CRAFTABLE_ITEMS
 ITEM_SUB_GROUP_LIST_PATH =    OUT_DATA_FOLDER_PATH / "itemSubGroupList.json"
 RESOURCE_POINTS_PATH =        OUT_DATA_FOLDER_PATH / RESOURCE_POINTS
+ITEM_FILTERS_PATH =           OUT_DATA_FOLDER_PATH / ITEM_FILTERS
+ITEM_TYPES_PATH =             OUT_DATA_FOLDER_PATH / "itemTypes.json"
+ITEM_MATERIALS_PATH =         OUT_DATA_FOLDER_PATH / "itemMaterials.json"
 
 # merged data files
 MERGED_ITEMS_PATH =                  MERGED_DATA_FOLDER_PATH / ITEMS
