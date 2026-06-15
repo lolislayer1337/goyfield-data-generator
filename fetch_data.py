@@ -333,7 +333,7 @@ def fetch_data():
         item["type"] = item_type
         item["material"] = None
 
-    crafter_id_list = [v for v in machine_crafters.keys()]
+    crafter_id_list = [buildings[v]["itemId"] for v in machine_crafters.keys()]
 
     for item in [v for v in items.values() if v["groupId"] == "facility"]:
         item_id: str = item["id"]
@@ -625,7 +625,7 @@ def get_item_material_product(item_id: str, type_id: str) -> str | None:
         return f"plant_grass_spc_{i}"
     
     if "plant_moss" in item_id:
-        return f"plant_moss_{i}"
+        return f"plant_flower_{i}"
     
     if "plant_grass" in item_id:
         return f"plant_grass_{i}"
@@ -668,14 +668,14 @@ def get_item_material_usable(item_id: str, type_id: str) -> str | None:
 
     if "item_bottled_food_" in item_id:
         if item_id.endswith("_1") or item_id.endswith("_2") or item_id.endswith("_3"):
-            return "plant_moss_2"
+            return "plant_flower_2"
         
         if item_id.endswith("_4") or item_id.endswith("_5"):
             return "plant_grass_1"
         
     if "item_bottled_rec_hp_" in item_id:
         if item_id.endswith("_1") or item_id.endswith("_2") or item_id.endswith("_3"):
-            return "plant_moss_1"
+            return "plant_flower_1"
         
         if item_id.endswith("_4") or item_id.endswith("_5"):
             return "plant_grass_2"
@@ -688,7 +688,21 @@ def get_item_material_usable(item_id: str, type_id: str) -> str | None:
     if item_id.startswith("item_bottled_grass") and "spc" in item_id:
         i = item_id[18:-5]
 
+        return f"plant_grass_spc_{i}"
+    
+    i = item_id.split("_")[-1]
+    
+    if item_id.startswith("item_plant_grass_powder"):
         return f"plant_grass_{i}"
+    
+    if item_id.startswith("item_plant_grass_spc_powder"):
+        return f"plant_grass_spc_{i}"
+    
+    if item_id.startswith("item_plant_moss_powder"):
+        return f"plant_flower_{i}"
+    
+    if item_id.startswith("item_plant_moss_spc_powder"):
+        return f"plant_flower_spc_{i}"
 
     return None
 
