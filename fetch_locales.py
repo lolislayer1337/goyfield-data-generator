@@ -35,7 +35,9 @@ def fetch_locales():
         "gatherable": {"nameId": -9150267921727244148},
         "product": {"nameId": 597830712374115114},
         "usable": {"nameId": -4607626685843896299},
-        "facility": {"nameId": -6016389103269425768}
+        "facility": {"nameId": -6016389103269425768},
+        "device": {"nameId": -8577319104756698784},
+        "nurturance": {"nameId": -4582825475272249577}
     }
 
     formula_sidebar_sectors_i18n_id = {
@@ -57,7 +59,12 @@ def fetch_locales():
 
     building_modes_i18n_id = {
         "normal": -1513433052175505109,
-        "liquid": -3808386161719669037
+        "liquid": -3808386161719669037,
+        "gas": -7794286450939495871,
+        "gasliquid": 8842972894074388869,
+        "gastrans": 8616554330814102544,
+        "liquidtrans": 9064411850863038632,
+        "solidtrans": -6863038014212755593
     }
 
     resource_points_i18n_id = {}

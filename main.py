@@ -10,11 +10,11 @@ create_empty_merged_files_if_not_exists()
 
 fetch_data()
 
-fetch_locales()
+# fetch_locales()
 
 merge_data()
 
-merge_locales()
+# merge_locales()
 
 # check_images()
 

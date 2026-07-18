@@ -21,6 +21,8 @@ def fetch_data():
     wiki_entry_data_table: dict =       get_json(paths.WIKI_ENTRY_DATA_TABLE_PATH)
     building_table: dict =              get_json(paths.FACTORY_BUILDING_TABLE_PATH)
     enemy_drop_table: dict =            get_json(paths.WIKI_ENEMY_DROP_TABLE_PATH)
+    full_gas_jar_table: dict =          get_json(paths.FULL_GAS_JAR_TABLE_PATH)
+    gas_miner_table: dict =             get_json(paths.FACTORY_GAS_MINER_TABLE_PATH)
 
 
     buildings = {}
@@ -139,6 +141,18 @@ def fetch_data():
             "emptyBottleId": empty_bottle_id,
             "liquidId": liquid_id
         }
+    
+    full_jars = {}
+    for item_id, obj in full_gas_jar_table.items():
+        id = obj["id"]
+        empty_jar_id = obj["emptyJarId"]
+        gas_id = obj["gasId"]
+
+        full_jars[id] = {
+            "id": id,
+            "emptyJarId": empty_jar_id,
+            "gasId": gas_id
+        }
 
 
     machine_crafters = {}
@@ -205,7 +219,8 @@ def fetch_data():
         for i in obj["mineable"]:
             temp = {
                 "miningItemId": i["miningItemId"],
-                "miningTimeMs": mining_time_ms
+                "miningTimeMs": mining_time_ms,
+                "consumeItem": None
             }
             if i["consumeItem"]["id"] != "":
                 temp["consumeItem"] = {
@@ -222,6 +237,35 @@ def fetch_data():
         buildings[id] = {
             "id": id,
             "type": "miner"
+        }
+
+    gas_miners = {}
+    for building_id, obj in gas_miner_table.items():
+        id = obj["id"]
+        mining_time_ms = obj["msPerRound"]
+        mineable = {}
+
+        for i in obj["mineable"]:
+            temp = {
+                "miningItemId": i["miningItemId"],
+                "miningTimeMs": mining_time_ms,
+                "consumeItem": None
+            }
+            if i["consumeItem"]["id"] != "":
+                temp["consumeItem"] = {
+                    "itemId": i["consumeItem"]["id"],
+                    "count": i["consumeItem"]["count"]
+                }
+            mineable[temp["miningItemId"]] = temp
+
+        gas_miners[id] = {
+            "id": id,
+            "mineable": mineable
+        }
+
+        buildings[id] = {
+            "id": id,
+            "type": "gasMiner"
         }
 
     fluid_pumps = {}
@@ -267,12 +311,15 @@ def fetch_data():
         "wiki_group_item_material": "gatherable",
         "wiki_group_item_product": "product",
         "wiki_group_item_usable": "usable",
-
+        "wiki_group_item_portable_device": "device",
+        "wiki_group_item_nurturance": "nurturance"
     }
     for obj in wiki_group_table["wiki_type_building"]["list"]:
         item_categories[obj["groupId"]] = "facility"
 
-    item_id_to_group_id = {}
+    item_id_to_group_id = {
+        "item_ap": "other"
+    }
     for obj in wiki_entry_data_table.values():
         item_id = obj["refItemId"]
         group_id = obj["groupId"]
@@ -298,6 +345,9 @@ def fetch_data():
             "rarity": rarity,
             "groupId": group_id
         }
+    
+    items["item_ap"]["type"] = "sanity"
+    items["item_ap"]["material"] = None
 
         
     item_filters = {
@@ -341,6 +391,18 @@ def fetch_data():
         item["type"] = item_type
         item["material"] = None
 
+    for item in [v for v in items.values() if v["groupId"] == "device"]:
+        item_id: str = item["id"]
+        item_type = get_item_type_device(item_id)
+        item["type"] = item_type
+        item["material"] = None
+
+    for item in [v for v in items.values() if v["groupId"] == "nurturance"]:
+        item_id: str = item["id"]
+        item_type = get_item_type_nurturance(item_id)
+        item["type"] = item_type
+        item["material"] = None
+
     
     item_group_set = set()
     item_rarity_set = set()
@@ -355,9 +417,9 @@ def fetch_data():
         item_group_set.add(group)
         item_type_set.add(item_type)
 
-    item_filters["rarity"] = list(item_rarity_set)
-    item_filters["groupId"] = list(item_group_set)
-    item_filters["type"] = list(item_type_set)
+    item_filters["rarity"] = sorted(list(item_rarity_set))
+    item_filters["groupId"] = sorted(list(item_group_set))
+    item_filters["type"] = sorted(list(item_type_set))
 
     item_types = get_key_lists_by_field(items, "type")
     item_groups = get_key_lists_by_field(items, "groupId")
@@ -368,7 +430,7 @@ def fetch_data():
     items = dict(sorted(items.items(), key=lambda item: item[1]["groupId"]))
 
     resource_points = {}
-    for obj in [item for item in item_table.values() if item["type"] == 41 or item["type"] == 28]:
+    for obj in [item for item in item_table.values() if item["type"] == 41 or item["type"] == 28 or item["type"] == 102]:
         point_id = obj["id"]
         item_id = obj["iconId"]
         point_type = ""
@@ -378,6 +440,9 @@ def fetch_data():
 
         if obj["type"] == 28:
             point_type = "mine"
+        
+        if obj["type"] == 102:
+            point_type = "gas"
 
         resource_points[point_id] = {
             "id": point_id,
@@ -405,12 +470,43 @@ def fetch_data():
     save_json(item_types, paths.ITEM_TYPES_PATH)
     save_json(item_groups, paths.ITEM_GROUPS_PATH)
     save_json(item_materials, paths.ITEM_MATERIALS_PATH)
+    save_json(full_jars, paths.FULL_JARS_PATH)
+    save_json(gas_miners, paths.GAS_MINERS_PATH)
+
+
+def get_item_type_device(item_id: str) -> str:
+    if item_id.startswith("item_device_balloon_recycle"):
+        return "balloon_recycle"
+
+    if item_id.startswith("item_device_xiranite_nexus"):
+        return "xiranite_nexus"
+    
+    if item_id.startswith("item_device_xiranite_radar"):
+        return "xiranite_radar"
+    
+    return "other"
+
+
+def get_item_type_nurturance(item_id: str) -> str:
+    if item_id.startswith("item_plant_crylplant"):
+        return "crylplant"
+    
+    if item_id.startswith("item_plant_mushroom"):
+        return "mushroom"
+    
+    if item_id.startswith("item_plant_spcstone"):
+        return "spcstone"
+    
+    return "other"
 
 
 def get_item_type_nature(item_id: str) -> str:
 
     if item_id.startswith("item_liquid"):
         return "liquid"
+    
+    if item_id.startswith("item_gas_"):
+        return "gas"
     
     if "_ore" in item_id or "item_quartz_sand" in item_id:
         return "ore"
@@ -438,8 +534,14 @@ def get_item_type_product(item_id: str) -> str:
     if item_id.startswith("item_fbottle_"):
         return "full_bottle"
     
+    if item_id.startswith("item_gasjar_"):
+        return "full_gas_jar"
+    
     if item_id.startswith("item_liquid_"):
         return "liquid"
+    
+    if item_id.startswith("item_gas_"):
+        return "gas"
     
     if item_id.startswith("item_equip_script_"):
         return "component"
@@ -459,7 +561,11 @@ def get_item_type_product(item_id: str) -> str:
     if "_bottle" in item_id:
         return "bottle"
     
+    if "_jar" in item_id:
+        return "jar"
+    
     if (item_id.endswith("_enr") 
+        or item_id.endswith("_enr2")
         or item_id.endswith("_mtl")
         or item_id.endswith("_glass")
         or item_id.endswith("_shell")
@@ -532,6 +638,9 @@ def get_item_type_facility(item_id: str, crafter_ids: list[str]) -> str:
     
     if item_id.startswith("item_port_pump_"):
         return "pump"
+    
+    if item_id.startswith("item_port_gas_pump_"):
+        return "gas_miner"
 
     return "other"
 
@@ -558,6 +667,19 @@ def get_item_material_nature(item_id: str, type_id: str) -> str | None:
         if "acid" in item_id:
             return "acid"
         
+    if type_id == "gas":
+        if "acid" in item_id:
+            return "acid"
+        
+        if "inert" in item_id:
+            return "inert"
+        
+        if "water" in item_id:
+            return "water"
+        
+        if "xiranite" in item_id:
+            return "xiranite"
+        
     i = item_id.split("_")[-1]
 
     if item_id.startswith("item_plant_grass_spc"):
@@ -583,7 +705,7 @@ def get_item_material_nature(item_id: str, type_id: str) -> str | None:
 
 def get_item_material_product(item_id: str, type_id: str) -> str | None:
 
-    if type_id == "full_bottle":
+    if type_id == "full_bottle" or type_id == "full_gas_jar":
         return None
     
     if "crystal_enr" in item_id or "originium_enr" in item_id:
@@ -642,11 +764,20 @@ def get_item_material_product(item_id: str, type_id: str) -> str | None:
     if "sewage" in item_id:
         return "sewage"
     
+    if "acid" in item_id:
+        return "acid"
+    
+    if "water" in item_id:
+        return "water"
+    
     if item_id.startswith("item_equip_script"):
         if item_id.endswith("_4_1"):
             return "copper"
         
         if item_id.endswith("_4_2"):
+            return "copper_enr"
+        
+        if item_id.endswith("_4_3"):
             return "copper_enr"
         
         if item_id.endswith("_1"):
