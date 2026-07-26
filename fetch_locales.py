@@ -9,6 +9,7 @@ def fetch_locales():
     building_table = get_json(paths.FACTORY_BUILDING_TABLE_PATH)
     items = get_json(paths.ITEMS_PATH)
     full_bottles = get_json(paths.FULL_BOTTLES_PATH)
+    full_jars: dict = get_json(paths.FULL_JARS_PATH)
     buildings = get_json(paths.BUILDINGS_PATH)
     resource_points = get_json(paths.RESOURCE_POINTS_PATH)
 
@@ -98,6 +99,15 @@ def fetch_locales():
             empty_bottle_name = items_i18n[empty_bottle_id]["name"]
 
             items_i18n[item_id]["name"] = f"{empty_bottle_name} ({liquid_name})"
+
+        for item_id, obj in full_jars.items():
+            gas_id = obj["gasId"]
+            empty_jar_id = obj["emptyJarId"]
+
+            gas_name = items_i18n[gas_id]["name"]
+            empty_jar_name = items_i18n[empty_jar_id]["name"]
+
+            items_i18n[item_id]["name"] = f"{empty_jar_name} ({gas_name})"
         
         buildings_i18n = {}
         for building_id, obj in buildings_i18n_id.items():
