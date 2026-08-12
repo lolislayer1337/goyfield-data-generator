@@ -37,6 +37,8 @@ HUB_CRAFTS = "hubCrafts.json"
 ITEM_NAMES = "itemNames.json"
 BUILDING_NAMES = "buildingNames.json"
 RESOURCE_POINT_NAMES = "resourcePointNames.json"
+CHARACTER_NAMES = "characterNames.json"
+WEAPON_NAMES = "weaponNames.json"
 
 # input locales
 BR_PATH = DATA_FOLDER_PATH / "I18nTextTable_BR.json"
@@ -110,6 +112,8 @@ FACTORY_BUILDING_TABLE_PATH =              DATA_FOLDER_PATH / "FactoryBuildingTa
 LIQUID_TABLE_PATH =                        DATA_FOLDER_PATH / "LiquidTable.json"
 GAS_TABLE_PATH =                           DATA_FOLDER_PATH / "GasTable.json"
 WIKI_ENEMY_DROP_TABLE_PATH =               DATA_FOLDER_PATH / "WikiEnemyDropTable.json"
+CHARACTER_TABLE_PATH =                     DATA_FOLDER_PATH / "CharacterTable.json"
+WEAPON_BASIC_TABLE_PATH =                  DATA_FOLDER_PATH / "WeaponBasicTable.json"
 
 # output files
 MACHINE_CRAFT_TABLE_PATH =    OUT_DATA_FOLDER_PATH / MACHINE_CRAFTS

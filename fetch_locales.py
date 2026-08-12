@@ -12,6 +12,8 @@ def fetch_locales():
     full_jars: dict = get_json(paths.FULL_JARS_PATH)
     buildings = get_json(paths.BUILDINGS_PATH)
     resource_points = get_json(paths.RESOURCE_POINTS_PATH)
+    character_table: dict = get_json(paths.CHARACTER_TABLE_PATH)
+    weapon_basic_table: dict = get_json(paths.WEAPON_BASIC_TABLE_PATH)
 
     items_i18n_id = {}
     for i in items.keys():
@@ -76,7 +78,19 @@ def fetch_locales():
             "nameId": name_id
         }
 
+    character_names_i18n_id = {}
 
+    for id, data in character_table.items():
+        name_code = data["name"]["id"]
+
+        character_names_i18n_id[id] = name_code
+
+    weapon_names_i18n_id = {}
+
+    for id, data in weapon_basic_table.items():
+        name_code = data["engName"]["id"]
+
+        weapon_names_i18n_id[id] = name_code
 
     def save_locales(input_path: Path, output_folder_path: Path):
         locales = get_json(input_path)
@@ -156,6 +170,18 @@ def fetch_locales():
         
         resource_point_names_i18n = {k: v["name"] for k, v in resource_points_i18n.items()}
         item_group_names_i18n = {k: v["name"] for k, v in item_groups_i18n.items()}
+
+        character_names_i18n = {}
+        for id, name_code in character_names_i18n_id.items():
+            name = locales[str(name_code)]
+
+            character_names_i18n[id] = name
+
+        weapon_names_i18n = {}
+        for id, name_code in weapon_names_i18n_id.items():
+            name = locales[str(name_code)]
+
+            weapon_names_i18n[id] = name
         
         save_json(items_i18n, output_folder_path / paths.ITEMS)
         save_json(buildings_i18n, output_folder_path / paths.BUILDINGS)
@@ -167,6 +193,8 @@ def fetch_locales():
         save_json(resource_points_i18n, output_folder_path / paths.RESOURCE_POINTS)
         save_json(resource_point_names_i18n, output_folder_path / paths.RESOURCE_POINT_NAMES)
         save_json(item_group_names_i18n, output_folder_path / "itemGroupNames.json")
+        save_json(character_names_i18n, output_folder_path / paths.CHARACTER_NAMES)
+        save_json(weapon_names_i18n, output_folder_path / paths.WEAPON_NAMES)
 
 
     save_locales(paths.DE_PATH, paths.DE_OUT_PATH)
