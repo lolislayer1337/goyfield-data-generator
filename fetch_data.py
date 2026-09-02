@@ -483,6 +483,9 @@ def get_item_type_device(item_id: str) -> str:
     
     if item_id.startswith("item_device_xiranite_radar"):
         return "xiranite_radar"
+
+    if item_id.startswith("item_arrow_chip_"):
+        return "arrow_chip"
     
     return "other"
 
@@ -528,6 +531,13 @@ def get_item_type_nature(item_id: str) -> str:
 
 def get_item_type_product(item_id: str) -> str:
 
+    if item_id.startswith("item_activity_"):
+        if item_id.endswith("_box"):
+            return "lung_box"
+
+        if item_id.endswith("_lung"):
+            return "lung"
+
     if item_id.startswith("item_proc_battery_"):
         return "battery"
     
@@ -540,7 +550,7 @@ def get_item_type_product(item_id: str) -> str:
     if item_id.startswith("item_liquid_"):
         return "liquid"
     
-    if item_id.startswith("item_gas_"):
+    if item_id.startswith("item_gas_") or item_id.endswith("_gas"):
         return "gas"
     
     if item_id.startswith("item_equip_script_"):
@@ -707,7 +717,7 @@ def get_item_material_product(item_id: str, type_id: str) -> str | None:
 
     if type_id == "full_bottle" or type_id == "full_gas_jar":
         return None
-    
+
     if "crystal_enr" in item_id or "originium_enr" in item_id:
         return "originium_enr"
     
@@ -725,9 +735,15 @@ def get_item_material_product(item_id: str, type_id: str) -> str | None:
     
     if "iron" in item_id:
         return "iron"
+
+    if "copper_xiranite" in item_id:
+        return "copper_xiranite"
     
     if "copper_enr" in item_id:
         return "copper_enr"
+
+    if "copper_poly" in item_id:
+        return "copper_poly"
     
     if "copper" in item_id:
         return "copper"
