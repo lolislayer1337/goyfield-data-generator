@@ -34,11 +34,13 @@ MACHINE_CRAFTS = "machineCrafts.json"
 MACHINE_CRAFT_GROUPS = "machineCraftGroups.json"
 MANUAL_CRAFTS = "manualCrafts.json"
 HUB_CRAFTS = "hubCrafts.json"
+GAS_ENV = "gasEnv.json"
 ITEM_NAMES = "itemNames.json"
 BUILDING_NAMES = "buildingNames.json"
 RESOURCE_POINT_NAMES = "resourcePointNames.json"
 CHARACTER_NAMES = "characterNames.json"
 WEAPON_NAMES = "weaponNames.json"
+GAS_ENV_NAMES = "gasEnvNames.json"
 
 # input locales
 BR_PATH = DATA_FOLDER_PATH / "I18nTextTable_BR.json"
@@ -105,6 +107,7 @@ FACTORY_BUILDING_ITEM_REVERSE_TABLE_PATH = DATA_FOLDER_PATH / "FactoryBuildingIt
 FACTORY_FLUID_PUMP_IN_TABLE_PATH =         DATA_FOLDER_PATH / "FactoryFluidPumpInTable.json"
 FACTORY_TRANSMUTER_TABLE_PATH =            DATA_FOLDER_PATH / "FactoryTransmuterTable.json"
 FACTORY_VAPORIZER_TABLE_PATH =             DATA_FOLDER_PATH / "FactoryVaporizerTable.json"
+FACTORY_ENV_DISPLAY_TABLE_PATH =           DATA_FOLDER_PATH / "FactoryEnvDisplayTable.json"
 ITEM_TYPE_TABLE_PATH =                     DATA_FOLDER_PATH / "ItemTypeTable.json"
 WIKI_GROUP_TABLE_PATH =                    DATA_FOLDER_PATH / "WikiGroupTable.json"
 WIKI_ENTRY_DATA_TABLE_PATH =               DATA_FOLDER_PATH / "WikiEntryDataTable.json"
@@ -140,6 +143,7 @@ RESOURCE_POINTS_PATH =        OUT_DATA_FOLDER_PATH / RESOURCE_POINTS
 ITEM_FILTERS_PATH =           OUT_DATA_FOLDER_PATH / ITEM_FILTERS
 ITEM_TYPES_PATH =             OUT_DATA_FOLDER_PATH / "itemTypes.json"
 ITEM_MATERIALS_PATH =         OUT_DATA_FOLDER_PATH / "itemMaterials.json"
+GAS_ENV_PATH =                OUT_DATA_FOLDER_PATH / GAS_ENV
 
 # merged data files
 MERGED_ITEMS_PATH =                  MERGED_DATA_FOLDER_PATH / ITEMS

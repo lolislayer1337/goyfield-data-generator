@@ -92,6 +92,13 @@ def fetch_locales():
 
         weapon_names_i18n_id[id] = name_code
 
+    gas_env_names_i18n_id = {
+        "gas_env_stable": 4749896721646405651,
+        "gas_env_wet": 2583412103900909986,
+        "gas_env_acidic": 8325730894015926297,
+        "gas_env_xiranite": 3873336576577928485,
+    }
+
     def save_locales(input_path: Path, output_folder_path: Path):
         locales = get_json(input_path)
 
@@ -182,6 +189,12 @@ def fetch_locales():
             name = locales[str(name_code)]
 
             weapon_names_i18n[id] = name
+
+        gas_env_names_i18n = {}
+        for id, name_code in gas_env_names_i18n_id.items():
+            name = locales[str(name_code)]
+
+            gas_env_names_i18n[id] = name
         
         save_json(items_i18n, output_folder_path / paths.ITEMS)
         save_json(buildings_i18n, output_folder_path / paths.BUILDINGS)
@@ -195,6 +208,7 @@ def fetch_locales():
         save_json(item_group_names_i18n, output_folder_path / "itemGroupNames.json")
         save_json(character_names_i18n, output_folder_path / paths.CHARACTER_NAMES)
         save_json(weapon_names_i18n, output_folder_path / paths.WEAPON_NAMES)
+        save_json(gas_env_names_i18n, output_folder_path / paths.GAS_ENV_NAMES)
 
 
     save_locales(paths.DE_PATH, paths.DE_OUT_PATH)

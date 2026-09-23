@@ -11,6 +11,7 @@ def fetch_data():
     fuel_item_table: dict =             get_json(paths.FACTORY_FUEL_ITEM_TABLE_PATH)
     power_station_table: dict =         get_json(paths.FACTORY_POWER_STATION_TABLE_PATH)
     miner_table: dict =                 get_json(paths.FACTORY_MINER_TABLE_PATH)
+    vaporizer_table: dict =             get_json(paths.FACTORY_VAPORIZER_TABLE_PATH)
     building_item_reverse_table: dict = get_json(paths.FACTORY_BUILDING_ITEM_REVERSE_TABLE_PATH)
     fluid_pump_in_table: dict =         get_json(paths.FACTORY_FLUID_PUMP_IN_TABLE_PATH)
     full_bottle_table: dict =           get_json(paths.FULL_BOTTLE_TABLE_PATH)
@@ -23,6 +24,54 @@ def fetch_data():
     enemy_drop_table: dict =            get_json(paths.WIKI_ENEMY_DROP_TABLE_PATH)
     full_gas_jar_table: dict =          get_json(paths.FULL_GAS_JAR_TABLE_PATH)
     gas_miner_table: dict =             get_json(paths.FACTORY_GAS_MINER_TABLE_PATH)
+    gas_env_table: dict =               get_json(paths.FACTORY_ENV_DISPLAY_TABLE_PATH)
+
+
+    gas_env_id_map = {
+        1: "gas_env_stable",
+        2: "gas_env_wet",
+        3: "gas_env_acidic",
+        4: "gas_env_xiranite",
+    }
+
+    gas_env_icon_map = {
+        "gas_env_stable": {
+            # "id": "gasEnvStable",
+            "id": "",
+            "color": "#444444",
+            "bgColor": "#32c0ff"
+        },
+        "gas_env_wet": {
+            # "id": "gasEnvWet",
+            "id": "",
+            "color": "#eeeeee",
+            "bgColor": "#414141"
+        },
+        "gas_env_acidic": {
+            # "id": "gasEnvAcidic",
+            "id": "",
+            "color": "#444444",
+            "bgColor": "#ffba00"
+        },
+        "gas_env_xiranite": {
+            # "id": "gasEnvXiranite",
+            "id": "",
+            "color": "#444444",
+            "bgColor": "#24d4ab"
+        },
+    }
+
+    gas_env = {}
+
+    for data in gas_env_table.values():
+        game_id = data["GenEnv"]
+        id = gas_env_id_map[game_id]
+
+        gas_env[id] = {
+            "id": id,
+            "gameId": game_id,
+            "icon": gas_env_icon_map[id]
+        }
 
 
     buildings = {}
@@ -51,6 +100,8 @@ def fetch_data():
         outcomes = []
         progress_round = craft["progressRound"]
         craft_time_ms = progress_round * msPerRound_groups[formula_group_id]
+        env = gas_env_id_map[craft["gasEnv"]] if craft["gasEnv"] != 0 else None
+
         for i in craft["ingredients"]:
             for item in i["group"]:
                 ingredients.append({
@@ -73,7 +124,8 @@ def fetch_data():
             "buildingId": building_id,
             "ingredients": ingredients,
             "outcomes": outcomes,
-            "craftTimeMs": craft_time_ms
+            "craftTimeMs": craft_time_ms,
+            "gasEnv": env
         }
 
         machine_crafts[id] = obj
@@ -285,6 +337,34 @@ def fetch_data():
             "type": "pump"
         }
 
+    vaporizers = {}
+    for building_id, obj in vaporizer_table.items():
+        id = obj["id"]
+        groups = []
+
+        for group in obj["groups"]:
+            consume_item = group["consumeItem"]
+            consume_rate = group["consumeRate"]
+            max_consume_rate = group["consumeRateUpperLimit"]
+            gas_env_id = gas_env_id_map[group["genEnv"]]
+
+            groups.append({
+                "consumeItem": consume_item,
+                "consumeRate": consume_rate,
+                "maxConsumeRate": max_consume_rate,
+                "gasEnv": gas_env_id
+            })
+
+        vaporizers[id] = {
+            "id": id,
+            "groups": groups
+        }
+
+        buildings[id] = {
+            "id": id,
+            "type": "vaporizer"
+        }
+
     item_id_to_building_id = {}
     for building_id, obj in buildings.items():
         item_id = building_item_reverse_table[building_id]["itemId"]
@@ -472,6 +552,8 @@ def fetch_data():
     save_json(item_materials, paths.ITEM_MATERIALS_PATH)
     save_json(full_jars, paths.FULL_JARS_PATH)
     save_json(gas_miners, paths.GAS_MINERS_PATH)
+    save_json(gas_env, paths.GAS_ENV_PATH)
+    save_json(vaporizers, paths.VAPORIZERS_PATH)
 
 
 def get_item_type_device(item_id: str) -> str:
