@@ -36,26 +36,22 @@ def fetch_data():
 
     gas_env_icon_map = {
         "gas_env_stable": {
-            # "id": "gasEnvStable",
-            "id": "",
+            "id": "gasEnvStable",
             "color": "#444444",
             "bgColor": "#32c0ff"
         },
         "gas_env_wet": {
-            # "id": "gasEnvWet",
-            "id": "",
+            "id": "gasEnvWet",
             "color": "#eeeeee",
             "bgColor": "#414141"
         },
         "gas_env_acidic": {
-            # "id": "gasEnvAcidic",
-            "id": "",
+            "id": "gasEnvAcidic",
             "color": "#444444",
             "bgColor": "#ffba00"
         },
         "gas_env_xiranite": {
-            # "id": "gasEnvXiranite",
-            "id": "",
+            "id": "gasEnvXiranite",
             "color": "#444444",
             "bgColor": "#24d4ab"
         },
@@ -733,6 +729,9 @@ def get_item_type_facility(item_id: str, crafter_ids: list[str]) -> str:
     
     if item_id.startswith("item_port_gas_pump_"):
         return "gas_miner"
+
+    if item_id.startswith("item_port_vaporizer"):
+        return "vaporizer"
 
     return "other"
 
