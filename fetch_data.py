@@ -474,6 +474,44 @@ def fetch_data():
         all_items.add(obj["itemId"])
 
 
+    equip_cond_type_map = {
+        0: "char_hp",
+        1: "ult_energy",
+        3: "damage",
+        4: "char_down",
+        5: "arts_reaction",
+    }
+
+    equip_items = {}
+
+    for id, obj in equip_item_table.items():
+        cond_type_code = obj["condType"]
+        cond_type = equip_cond_type_map[cond_type_code]
+        cond_params = obj["condParams"]
+        cast_time = obj["castTime"]
+        cast_count = obj["chargeCount"]
+        cast_to_main_count = obj["toMainCharCount"]
+        cooldown = obj["cooldown"]
+        recover_time = obj["recoverTime"]
+        recover_upper_count = obj["recoverUpperCount"]
+        level_up_cast_count = obj["levelUpChargeCount"]
+        level_up_recover_upper_count = obj["levelUpRecoverUpperCount"]
+
+        equip_items[id] = {
+            "itemId": obj["itemId"],
+            "condType": cond_type,
+            "condParams": cond_params,
+            "castTime": cast_time,
+            "castCount": cast_count,
+            "castToMainCount": cast_to_main_count,
+            "cooldown": cooldown,
+            "recoverTime": recover_time,
+            "recoverUpperCount": recover_upper_count,
+            "levelUpCastCount": level_up_cast_count,
+            "levelUpRecoverUpperCount": level_up_recover_upper_count,
+        }
+
+
     item_categories = {
         "wiki_group_item_nature": "nature",
         "wiki_group_item_material": "gatherable",
@@ -527,7 +565,6 @@ def fetch_data():
     }
 
 
-    
     for item in [v for v in items.values() if v["groupId"] == "nature"]:
         item_id: str = item["id"]
         item_type = get_item_type_nature(item_id)
@@ -651,6 +688,7 @@ def fetch_data():
     save_json(vaporizers, paths.VAPORIZERS_PATH)
     save_json(usable_items, paths.USABLE_ITEMS_PATH)
     save_json(buffs_bb_fields, paths.USABLE_ITEMS_BB_PATH)
+    save_json(equip_items, paths.EQUIP_ITEMS_PATH)
 
 
 def get_item_type_device(item_id: str) -> str:
