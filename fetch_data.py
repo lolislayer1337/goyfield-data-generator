@@ -25,6 +25,8 @@ def fetch_data():
     full_gas_jar_table: dict =          get_json(paths.FULL_GAS_JAR_TABLE_PATH)
     gas_miner_table: dict =             get_json(paths.FACTORY_GAS_MINER_TABLE_PATH)
     gas_env_table: dict =               get_json(paths.FACTORY_ENV_DISPLAY_TABLE_PATH)
+    usable_item_table: dict =           get_json(paths.USE_ITEM_TABLE_PATH)
+    equip_item_table: dict =            get_json(paths.EQUIP_ITEM_TABLE_PATH)
 
 
     gas_env_id_map = {
@@ -382,13 +384,104 @@ def fetch_data():
         obj["iconId"] = icon_id
 
 
+    effect_type_map = {
+        1: "revive",
+        2: "buff",
+    }
+
+    item_id_to_custom_buff_bb = {
+        "item_bottled_insec1_1": [
+            {
+                "buffId": "buff_custom_revive_1",
+                "blackboard": [
+                    {
+                        "key": "value",
+                        "value": 0.1
+                    }
+                ]
+            }
+        ],
+        "item_bottled_insec1_2": [
+            {
+                "buffId": "buff_custom_revive_1",
+                "blackboard": [
+                    {
+                        "key": "value",
+                        "value": 0.3
+                    }
+                ]
+            }
+        ]
+    }
+
+    usable_items = {}
+    buffs_bb_fields = {}
+
+    for id, obj in usable_item_table.items():
+        effect_type_code = obj["effectType"]
+        use_actions: list = obj["useActions"]
+        stack_key = obj["stackingKey"] if obj["stackingKey"] != "" else None
+
+        if len(use_actions) == 0 and effect_type_code != 1:
+            continue
+
+        duration = obj["duration"]
+
+        buffs = []
+
+        for action in use_actions:
+            buff_bb_data = action["buffBBData"]
+            buff_id = buff_bb_data["buffId"]
+
+            if buff_id == "":
+                break
+
+            buff_bb = []
+            for entry in buff_bb_data["blackboard"]:
+                key = entry["key"]
+                value = entry["value"]
+
+                if value == 0:
+                    continue
+
+                buff_bb.append({
+                    "key": key,
+                    "value": value
+                })
+
+            buffs.append({
+                "buffId": buff_id,
+                "blackboard": buff_bb
+            })
+
+            if buff_id not in buffs_bb_fields:
+                buffs_bb_fields[buff_id] = [v["key"] for v in buff_bb]
+
+        if id in item_id_to_custom_buff_bb:
+            custom_buffs = item_id_to_custom_buff_bb[id]
+            buffs.extend(custom_buffs)
+
+        if len(buffs) == 0:
+            continue
+
+        usable_items[id] = {
+            "itemId": obj["itemId"],
+            "duration": duration,
+            "stackingKey": stack_key,
+            "buffs": buffs
+        }
+
+        all_items.add(obj["itemId"])
+
+
     item_categories = {
         "wiki_group_item_nature": "nature",
         "wiki_group_item_material": "gatherable",
         "wiki_group_item_product": "product",
         "wiki_group_item_usable": "usable",
         "wiki_group_item_portable_device": "device",
-        "wiki_group_item_nurturance": "nurturance"
+        "wiki_group_item_nurturance": "nurturance",
+        "wiki_group_item_special": "special",
     }
     for obj in wiki_group_table["wiki_type_building"]["list"]:
         item_categories[obj["groupId"]] = "facility"
@@ -413,7 +506,7 @@ def fetch_data():
         id = obj["id"]
         icon_id = obj["iconId"]
         rarity = obj["rarity"]
-        group_id = item_id_to_group_id[item_id]
+        group_id = item_id_to_group_id[item_id] if item_id in item_id_to_group_id else "special"
 
         items[id] = {
             "id": id,
@@ -479,6 +572,10 @@ def fetch_data():
         item["type"] = item_type
         item["material"] = None
 
+    for item in [v for v in items.values() if v["groupId"] == "special"]:
+        item["type"] = "other"
+        item["material"] = None
+
     
     item_group_set = set()
     item_rarity_set = set()
@@ -487,6 +584,8 @@ def fetch_data():
     for item in items.values():
         rarity = item["rarity"]
         group = item["groupId"]
+        if "type" not in item:
+            print(item)
         item_type = item["type"]
 
         item_rarity_set.add(rarity)
@@ -550,6 +649,8 @@ def fetch_data():
     save_json(gas_miners, paths.GAS_MINERS_PATH)
     save_json(gas_env, paths.GAS_ENV_PATH)
     save_json(vaporizers, paths.VAPORIZERS_PATH)
+    save_json(usable_items, paths.USABLE_ITEMS_PATH)
+    save_json(buffs_bb_fields, paths.USABLE_ITEMS_BB_PATH)
 
 
 def get_item_type_device(item_id: str) -> str:

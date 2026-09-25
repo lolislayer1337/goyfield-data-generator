@@ -15,6 +15,8 @@ ITEM_ICONS_FOLDER_PATH = IMAGES_FOLDER_PATH / "items"
 
 # file names
 ITEMS = "items.json"
+USABLE_ITEMS = "usableItems.json"
+EQUIP_ITEMS = "equipItems.json"
 FULL_BOTTLES = "fullBottles.json"
 FULL_JARS = "fullJars.json"
 FUEL = "fuel.json"
@@ -117,6 +119,8 @@ GAS_TABLE_PATH =                           DATA_FOLDER_PATH / "GasTable.json"
 WIKI_ENEMY_DROP_TABLE_PATH =               DATA_FOLDER_PATH / "WikiEnemyDropTable.json"
 CHARACTER_TABLE_PATH =                     DATA_FOLDER_PATH / "CharacterTable.json"
 WEAPON_BASIC_TABLE_PATH =                  DATA_FOLDER_PATH / "WeaponBasicTable.json"
+USE_ITEM_TABLE_PATH =                      DATA_FOLDER_PATH / "UseItemTable.json"
+EQUIP_ITEM_TABLE_PATH =                    DATA_FOLDER_PATH / "EquipItemTable.json"
 
 # output files
 MACHINE_CRAFT_TABLE_PATH =    OUT_DATA_FOLDER_PATH / MACHINE_CRAFTS
@@ -144,6 +148,9 @@ ITEM_FILTERS_PATH =           OUT_DATA_FOLDER_PATH / ITEM_FILTERS
 ITEM_TYPES_PATH =             OUT_DATA_FOLDER_PATH / "itemTypes.json"
 ITEM_MATERIALS_PATH =         OUT_DATA_FOLDER_PATH / "itemMaterials.json"
 GAS_ENV_PATH =                OUT_DATA_FOLDER_PATH / GAS_ENV
+USABLE_ITEMS_PATH =           OUT_DATA_FOLDER_PATH / USABLE_ITEMS
+EQUIP_ITEMS_PATH =            OUT_DATA_FOLDER_PATH / EQUIP_ITEMS
+USABLE_ITEMS_BB_PATH =        OUT_DATA_FOLDER_PATH / "usableItemsBlackBoard.json"
 
 # merged data files
 MERGED_ITEMS_PATH =                  MERGED_DATA_FOLDER_PATH / ITEMS
