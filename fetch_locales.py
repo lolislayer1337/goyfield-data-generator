@@ -14,6 +14,8 @@ def fetch_locales():
     resource_points = get_json(paths.RESOURCE_POINTS_PATH)
     character_table: dict = get_json(paths.CHARACTER_TABLE_PATH)
     weapon_basic_table: dict = get_json(paths.WEAPON_BASIC_TABLE_PATH)
+    usable_item_table: dict = get_json(paths.USE_ITEM_TABLE_PATH)
+    equip_item_table: dict = get_json(paths.EQUIP_ITEM_TABLE_PATH)
 
     items_i18n_id = {}
     for i in items.keys():
@@ -98,6 +100,27 @@ def fetch_locales():
         "gas_env_acidic": 8325730894015926297,
         "gas_env_xiranite": 3873336576577928485,
     }
+
+    usable_items_i18n_id = {}
+
+    for id, obj in usable_item_table.items():
+        desc_id = obj["itemUseDesc"]["id"]
+
+        usable_items_i18n_id[id] = {
+            "desc": desc_id,
+        }
+
+    equip_items_i18n_id = {}
+
+    for id, obj in equip_item_table.items():
+        desc_id = obj["equipDesc"]["id"]
+        extra_desc_id = obj["equipExtraDesc"]["id"]
+
+        equip_items_i18n_id[id] = {
+            "desc": desc_id,
+            "extraDesc": extra_desc_id,
+        }
+
 
     def save_locales(input_path: Path, output_folder_path: Path):
         locales = get_json(input_path)
@@ -195,6 +218,29 @@ def fetch_locales():
             name = locales[str(name_code)]
 
             gas_env_names_i18n[id] = name
+
+        usable_items_i18n = {}
+        for id, obj in usable_items_i18n_id.items():
+            desc_id = str(obj["desc"])
+
+            desc = locales[desc_id]
+
+            usable_items_i18n[id] = {
+                "desc": desc
+            }
+
+        equip_items_i18n = {}
+        for id, obj in equip_items_i18n_id.items():
+            desc_id = str(obj["desc"])
+            extra_desc_id = str(obj["extraDesc"])
+
+            desc = locales[desc_id]
+            extra_desc = locales[extra_desc_id]
+
+            equip_items_i18n[id] = {
+                "desc": desc,
+                "extraDesc": extra_desc
+            }
         
         save_json(items_i18n, output_folder_path / paths.ITEMS)
         save_json(buildings_i18n, output_folder_path / paths.BUILDINGS)
@@ -209,6 +255,8 @@ def fetch_locales():
         save_json(character_names_i18n, output_folder_path / paths.CHARACTER_NAMES)
         save_json(weapon_names_i18n, output_folder_path / paths.WEAPON_NAMES)
         save_json(gas_env_names_i18n, output_folder_path / paths.GAS_ENV_NAMES)
+        save_json(usable_items_i18n, output_folder_path / paths.USABLE_ITEMS)
+        save_json(equip_items_i18n, output_folder_path / paths.EQUIP_ITEMS)
 
 
     save_locales(paths.DE_PATH, paths.DE_OUT_PATH)
