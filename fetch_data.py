@@ -465,7 +465,7 @@ def fetch_data():
             continue
 
         usable_items[id] = {
-            "itemId": obj["itemId"],
+            "id": obj["itemId"],
             "duration": duration,
             "stackingKey": stack_key,
             "buffs": buffs
@@ -498,7 +498,7 @@ def fetch_data():
         level_up_recover_upper_count = obj["levelUpRecoverUpperCount"]
 
         equip_items[id] = {
-            "itemId": obj["itemId"],
+            "id": obj["itemId"],
             "condType": cond_type,
             "condParams": cond_params,
             "castTime": cast_time,
