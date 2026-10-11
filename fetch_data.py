@@ -389,6 +389,11 @@ def fetch_data():
         2: "buff",
     }
 
+    target_type_map = {
+        0: "user",
+        1: "team"
+    }
+
     item_id_to_custom_buff_bb = {
         "item_bottled_insec1_1": [
             {
@@ -419,6 +424,8 @@ def fetch_data():
 
     for id, obj in usable_item_table.items():
         effect_type_code = obj["effectType"]
+        target_type_code = obj["targetNumType"]
+        target_type = target_type_map[target_type_code]
         use_actions: list = obj["useActions"]
         stack_key = obj["stackingKey"] if obj["stackingKey"] != "" else None
 
@@ -468,6 +475,7 @@ def fetch_data():
             "id": obj["itemId"],
             "duration": duration,
             "stackingKey": stack_key,
+            "targetType": target_type,
             "buffs": buffs
         }
 
