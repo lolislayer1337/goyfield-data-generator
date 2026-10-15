@@ -21,7 +21,9 @@ def merge_data():
         paths.MACHINE_CRAFTS,
         paths.MACHINE_CRAFT_GROUPS,
         paths.MANUAL_CRAFTS,
-        paths.HUB_CRAFTS
+        paths.HUB_CRAFTS,
+        paths.USABLE_ITEMS,
+        paths.EQUIP_ITEMS,
     ]
 
     merged_prev = [get_json(paths.MERGED_DATA_FOLDER_PATH / file_name) for file_name in data_files_list]

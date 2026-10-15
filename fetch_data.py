@@ -735,6 +735,12 @@ def get_item_type_nature(item_id: str) -> str:
     
     if item_id.startswith("item_gas_"):
         return "gas"
+
+    if item_id.startswith("item_byproduct_"):
+        return "byproduct"
+
+    if item_id.startswith("item_ranch_milk"):
+        return "milk"
     
     if "_ore" in item_id or "item_quartz_sand" in item_id:
         return "ore"
@@ -748,7 +754,7 @@ def get_item_type_nature(item_id: str) -> str:
     if "_spc_" in item_id:
         return "plant_special"
     
-    if "_plant_" in item_id:
+    if "_plant_" in item_id or item_id.startswith("item_corp_"):
         return "plant"
     
     return "other"
@@ -783,6 +789,15 @@ def get_item_type_product(item_id: str) -> str:
     
     if item_id.startswith("item_muck_"):
         return "muck"
+
+    if item_id.startswith("item_Ingredient_"):
+        return "ingredient"
+
+    if item_id.startswith("item_byproduct_"):
+        return "byproduct"
+
+    if item_id.startswith("item_ranch_fodder"):
+        return "fodder"
     
     if "enr_powder" in item_id and "xiranite_enr" not in item_id:
         return "compressed_powder"
@@ -836,6 +851,9 @@ def get_item_type_usable(item_id: str) -> str:
     
     if item_id.startswith("item_bottled_flower") or item_id.startswith("item_bottled_grass"):
         return "special_food"
+
+    if item_id.startswith("item_inn_drink_"):
+        return "drink"
 
     return "other"
 
@@ -938,6 +956,33 @@ def get_item_material_nature(item_id: str, type_id: str) -> str | None:
     if item_id.startswith("item_plant_bbflower"):
         return f"plant_bbflower_{i}"
 
+    if "_bean_" in item_id:
+        return f"bean_{i}"
+
+    if "_potato_" in item_id:
+        return f"potato_{i}"
+
+    if "_mushroom_" in item_id:
+        return f"mushroom_{i}"
+
+    if "_cabbage_" in item_id:
+        return f"cabbage_{i}"
+
+    if "_canolaflower_" in item_id:
+        return f"canolaflower_{i}"
+
+    if "_strawberry_" in item_id:
+        return f"strawberry_{i}"
+
+    if "_sugarcane_" in item_id:
+        return f"sugarcane_{i}"
+
+    if "_tomato_" in item_id:
+        return f"tomato_{i}"
+
+    if "_whitegourd_" in item_id:
+        return f"whitegourd_{i}"
+
     return None
 
 
@@ -998,6 +1043,27 @@ def get_item_material_product(item_id: str, type_id: str) -> str | None:
     
     if "plant_bbflower" in item_id:
         return f"plant_bbflower_{i}"
+
+    if "_bean_" in item_id:
+        return f"bean_{i}"
+
+    if "_potato_" in item_id:
+        return f"potato_{i}"
+
+    if "_sugar_1" in item_id:
+        return "sugarcane_1"
+
+    if "_flour_1" in item_id:
+        return "plant_sp_1"
+
+    if "_oil_1" in item_id:
+        return "canolaflower_1"
+
+    if "_paprika_1" in item_id:
+        return "plant_sp_2"
+
+    if "_starch_1" in item_id:
+        return "potato_1"
     
     if "xiranite_enr" in item_id:
         return "xiranite_enr"
@@ -1040,6 +1106,12 @@ def get_item_material_product(item_id: str, type_id: str) -> str | None:
 
 
 def get_item_material_usable(item_id: str, type_id: str) -> str | None:
+
+    if item_id == "item_inn_drink_10":
+        return "strawberry_1"
+
+    if item_id == "item_inn_drink_4":
+        return "sugarcane_1"
 
     if "item_bottled_food_" in item_id:
         if item_id.endswith("_1") or item_id.endswith("_2") or item_id.endswith("_3"):

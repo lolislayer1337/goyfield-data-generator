@@ -22,7 +22,9 @@ def create_empty_merged_files_if_not_exists():
         paths.MERGED_MACHINE_CRAFTS_PATH,
         paths.MERGED_MACHINE_CRAFT_GROUPS_PATH,
         paths.MERGED_MANUAL_CRAFTS_PATH,
-        paths.MERGED_HUB_CRAFTS_PATH
+        paths.MERGED_HUB_CRAFTS_PATH,
+        paths.MERGED_USABLE_ITEMS_PATH,
+        paths.MERGED_EQUIP_ITEMS_PATH,
     ]
 
     locales_folders_list: list[Path] = [
